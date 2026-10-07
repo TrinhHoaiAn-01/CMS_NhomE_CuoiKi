@@ -86,3 +86,6 @@ if( jobscout_is_woocommerce_activated() ){
 if( jobscout_is_wp_job_manager_activated() ) :
 	require get_template_directory() . '/inc/wp-job-manager-filters.php';
 endif;
+
+// CMS project customizations are maintained directly in the JobScout theme.
+require get_template_directory() . '/inc/project.php';
