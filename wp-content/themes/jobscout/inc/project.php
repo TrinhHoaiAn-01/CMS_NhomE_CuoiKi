@@ -15,6 +15,15 @@ function jsc_setting( $key, $default = '' ) {
     return get_theme_mod( 'jsc_' . $key, $default );
 }
 
+function jsc_fallback_menu() {
+    echo '<ul class="jsc-menu">';
+    foreach ( array( '' => 'Home', 'jobs' => 'Jobs', 'news' => 'News', 'about' => 'About', 'contact' => 'Contact' ) as $slug => $label ) {
+        $current = '' === $slug ? is_front_page() : is_page( $slug );
+        printf( '<li%s><a href="%s"%s>%s</a></li>', $current ? ' class="current-menu-item"' : '', esc_url( '' === $slug ? home_url( '/' ) : jsc_url( $slug ) ), $current ? ' aria-current="page"' : '', esc_html( $label ) );
+    }
+    echo '</ul>';
+}
+
 add_action( 'wp_enqueue_scripts', function () {
     foreach ( array( 'jobscout', 'jobscout-google-fonts', 'owl-carousel' ) as $handle ) {
         wp_dequeue_style( $handle );
