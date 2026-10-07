@@ -85,3 +85,26 @@ function jsc_subscribe() {
 }
 add_action( 'admin_post_jsc_subscribe', 'jsc_subscribe' );
 add_action( 'admin_post_nopriv_jsc_subscribe', 'jsc_subscribe' );
+
+function jsc_jobs( $args = array() ) {
+    return new WP_Query( wp_parse_args( $args, array( 'post_type' => 'job_listing', 'post_status' => 'publish', 'posts_per_page' => 6, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC' ), 'meta_query' => array( array( 'key' => '_filled', 'value' => '1', 'compare' => '!=' ) ) ) ) );
+}
+
+function jsc_news( $args = array() ) {
+    return new WP_Query( wp_parse_args( $args, array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 4, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC' ), 'ignore_sticky_posts' => true ) ) );
+}
+
+function jsc_cards( $query, $kind ) {
+    if ( $query->have_posts() ) {
+        echo '<div class="jsc-grid jsc-' . esc_attr( $kind ) . '-grid">';
+        while ( $query->have_posts() ) { $query->the_post(); get_template_part( 'template-parts/project-' . $kind . '-card' ); }
+        echo '</div>';
+    } else { echo '<p class="jsc-empty">New opportunities and stories will be published here soon.</p>'; }
+    wp_reset_postdata();
+}
+
+add_action( 'init', function () {
+    add_post_type_support( 'job_listing', 'custom-fields' );
+    add_post_type_support( 'post', 'custom-fields' );
+    add_post_type_support( 'page', 'custom-fields' );
+} );
