@@ -32,3 +32,9 @@ if ( ! wp_get_nav_menu_object( 'JobScout Primary' ) ) {
     set_theme_mod( 'nav_menu_locations', $locations );
 }
 WP_CLI::success( 'JobScout project configuration is ready.' );
+update_option( 'show_on_front', 'page' );
+update_option( 'page_on_front', $jsc_pages['home'] );
+update_option( 'blogname', 'Plan Do See Global Inc.' );
+update_option( 'blogdescription', 'Share Omotenashi with the world' );
+update_option( 'permalink_structure', '/%postname%/' );
+flush_rewrite_rules( false );

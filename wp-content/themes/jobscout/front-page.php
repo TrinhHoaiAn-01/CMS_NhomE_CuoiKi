@@ -1,22 +1,10 @@
 <?php
-/**
- * Front Page
- * 
- * @package JobScout
- */
-
-$home_sections = jobscout_get_home_sections();
-
-if ( 'posts' == get_option( 'show_on_front' ) ) { //Show Static Blog Page
-    include( get_home_template() );
-}elseif( $home_sections ){ 
-    get_header();
-    //If any one section are enabled then show custom home page.
-    foreach( $home_sections as $section ){
-        get_template_part( 'sections/' . esc_attr( $section ) );  
-    }
-    get_footer();
-}else {
-    //If all section are disabled then show respective page template. 
-    include( get_page_template() );
-}
+/** JobScout project Home. Content is sourced from WordPress and WP Job Manager. */
+get_header();
+?>
+<main id="main-content" class="jsc-home">
+<?php while ( have_posts() ) : the_post(); ?>
+<?php if ( trim( get_the_content() ) ) : ?><div class="jsc-container jsc-home-intro"><?php the_content(); ?></div><?php endif; ?>
+<?php endwhile; ?>
+</main>
+<?php get_footer(); ?>
