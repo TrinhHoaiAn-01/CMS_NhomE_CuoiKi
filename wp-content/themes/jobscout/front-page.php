@@ -16,8 +16,11 @@ get_header();
     <div class="jsc-actions"><a class="jsc-button outline" href="<?php echo esc_url( jsc_url( 'jobs' ) ); ?>">View More Jobs</a></div>
     </div>
 </section>
-<?php while ( have_posts() ) : the_post(); ?>
-<?php if ( trim( get_the_content() ) ) : ?><div class="jsc-container jsc-home-intro"><?php the_content(); ?></div><?php endif; ?>
-<?php endwhile; ?>
+<section class="jsc-career" aria-labelledby="career-title">
+    <div class="jsc-career-copy"><h2 class="jsc-title" id="career-title">Career With Us</h2>
+        <?php while ( have_posts() ) : the_post(); the_content(); endwhile; ?>
+        <a class="jsc-button jsc-career-button" href="<?php echo esc_url( jsc_url( 'about' ) ); ?>">More About Us</a>
+    </div>
+</section>
 </main>
 <?php get_footer(); ?>

@@ -34,6 +34,9 @@ if ( ! wp_get_nav_menu_object( 'JobScout Primary' ) ) {
 WP_CLI::success( 'JobScout project configuration is ready.' );
 update_option( 'show_on_front', 'page' );
 update_option( 'page_on_front', $jsc_pages['home'] );
+if ( ! trim( get_post_field( 'post_content', $jsc_pages['home'] ) ) ) {
+    wp_update_post( array( 'ID' => $jsc_pages['home'], 'post_content' => '<!-- wp:paragraph --><p>Plan Do See Global is a hospitality group founded in Japan and rooted in “Omotenashi”, the Japanese principle of selfless hospitality. We strive to deliver unforgettable and bespoke experiences, to understand local cultures like natives, to provide service that is warm but not intrusive, and to foresee our guests’ every need at all times. That is our sole mission and purpose.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>We are experts in all stages of project development: concept, design, implementation and management.<br>We love to find unique ways to create experiences that surprise and delight guests and customers.</p><!-- /wp:paragraph -->' ) );
+}
 update_option( 'blogname', 'Plan Do See Global Inc.' );
 update_option( 'blogdescription', 'Share Omotenashi with the world' );
 update_option( 'permalink_structure', '/%postname%/' );
