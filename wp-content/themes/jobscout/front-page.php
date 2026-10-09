@@ -10,6 +10,12 @@ get_header();
         <?php get_template_part( 'template-parts/project-job-search' ); ?>
     </div>
 </section>
+<section class="jsc-top-jobs jsc-section" aria-labelledby="top-jobs-title">
+    <div class="jsc-container"><h2 class="jsc-title" id="top-jobs-title">Top Jobs</h2>
+    <?php jsc_cards( jsc_jobs(), 'job' ); ?>
+    <div class="jsc-actions"><a class="jsc-button outline" href="<?php echo esc_url( jsc_url( 'jobs' ) ); ?>">View More Jobs</a></div>
+    </div>
+</section>
 <?php while ( have_posts() ) : the_post(); ?>
 <?php if ( trim( get_the_content() ) ) : ?><div class="jsc-container jsc-home-intro"><?php the_content(); ?></div><?php endif; ?>
 <?php endwhile; ?>
