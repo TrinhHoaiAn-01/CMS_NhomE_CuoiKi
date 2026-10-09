@@ -7,6 +7,7 @@ get_header();
     <div class="jsc-hero-copy">
         <h1 id="home-title"><?php echo esc_html( jsc_setting( 'home_heading', 'Find Your Dream Jobs' ) ); ?></h1>
         <p><?php echo esc_html( jsc_setting( 'home_description', 'The secret behind our company is simple: to always put ourselves in the other person’s shoes—employee, guest or customer. This allows us to see the world through their eyes, anticipate their needs and better understand their feelings.' ) ); ?></p>
+        <?php get_template_part( 'template-parts/project-job-search' ); ?>
     </div>
 </section>
 <?php while ( have_posts() ) : the_post(); ?>
