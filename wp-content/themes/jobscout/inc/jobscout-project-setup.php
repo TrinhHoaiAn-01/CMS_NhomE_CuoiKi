@@ -51,3 +51,14 @@ foreach ( require __DIR__ . '/project-jobs.php' as $order => $job ) {
     wp_set_object_terms( $id, 'Fulltime', 'job_listing_type' );
     wp_set_object_terms( $id, $category, 'job_listing_category' );
 }
+
+if ( ! term_exists( 'pds-news', 'category' ) ) { wp_insert_term( 'PDS News', 'category', array( 'slug' => 'pds-news' ) ); }
+$news_category = get_term_by( 'slug', 'pds-news', 'category' );
+foreach ( require __DIR__ . '/project-news.php' as $order => $story ) {
+    list( $slug, $title, $image, $excerpt, $intro, $body ) = $story;
+    if ( get_page_by_path( $slug, OBJECT, 'post' ) ) { continue; }
+    $id = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'post_excerpt' => $excerpt, 'menu_order' => $order, 'post_date' => '2022-10-20 09:00:00', 'post_content' => '<!-- wp:paragraph --><p>' . esc_html( $intro ) . '</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>' . esc_html( $body ) . '</p><!-- /wp:paragraph -->', 'post_category' => array( $news_category->term_id ) ), true );
+    if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
+    update_post_meta( $id, 'jsc_image', $image );
+    update_post_meta( $id, 'jsc_location', 'Ho Chi Minh City' );
+}

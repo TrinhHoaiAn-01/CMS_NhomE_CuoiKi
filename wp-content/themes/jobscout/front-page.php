@@ -23,4 +23,5 @@ get_header();
     </div>
 </section>
 </main>
+<?php // The news section uses the same native post cards as the archive. ?>
 <?php get_footer(); ?>

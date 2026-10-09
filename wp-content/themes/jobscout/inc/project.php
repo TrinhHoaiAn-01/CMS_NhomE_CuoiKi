@@ -93,7 +93,7 @@ function jsc_jobs( $args = array() ) {
 }
 
 function jsc_news( $args = array() ) {
-    return new WP_Query( wp_parse_args( $args, array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 4, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC' ), 'ignore_sticky_posts' => true ) ) );
+    return new WP_Query( wp_parse_args( $args, array( 'post_type' => 'post', 'post_status' => 'publish', 'category_name' => 'pds-news', 'posts_per_page' => 4, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC' ), 'ignore_sticky_posts' => true ) ) );
 }
 
 function jsc_cards( $query, $kind ) {
