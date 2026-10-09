@@ -22,6 +22,10 @@ get_header();
         <a class="jsc-button jsc-career-button" href="<?php echo esc_url( jsc_url( 'about' ) ); ?>">More About Us</a>
     </div>
 </section>
+<section class="jsc-home-news jsc-section" aria-labelledby="home-news-title">
+    <div class="jsc-container"><h2 class="jsc-title" id="home-news-title">Newest Blog Entries</h2>
+        <?php jsc_cards( jsc_news(), 'news' ); ?>
+    </div>
+</section>
 </main>
-<?php // The news section uses the same native post cards as the archive. ?>
 <?php get_footer(); ?>
