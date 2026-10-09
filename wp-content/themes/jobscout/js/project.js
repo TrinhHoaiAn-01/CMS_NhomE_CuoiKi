@@ -16,3 +16,20 @@ if (menuToggle && navigation) {
         }
     });
 }
+// Keep the disclosure state consistent across breakpoints and pointer dismissal.
+if (menuToggle && navigation) {
+    const closeMenu = () => {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        navigation.classList.remove('is-open');
+    };
+    document.addEventListener('click', event => {
+        if (!navigation.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+            closeMenu();
+            menuToggle.focus();
+        }
+    });
+    window.matchMedia('(max-width: 700px)').addEventListener('change', closeMenu);
+}
