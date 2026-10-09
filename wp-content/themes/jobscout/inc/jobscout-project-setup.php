@@ -32,3 +32,10 @@ if ( ! wp_get_nav_menu_object( 'JobScout Primary' ) ) {
     set_theme_mod( 'nav_menu_locations', $locations );
 }
 WP_CLI::success( 'JobScout project configuration is ready.' );
+
+
+if ( ! get_post_meta( $jsc_pages['about'], 'jsc_principles_seeded', true ) ) {
+    wp_update_post( array( 'ID' => $jsc_pages['about'], 'post_content' => '<!-- wp:heading {"level":3} --><h3>Our Vision</h3><!-- /wp:heading --><!-- wp:paragraph --><p>Create hotels and restaurants around the world that offer memorable experiences while building a lasting, positive relationship together with our guests, partners, team members and communities.</p><!-- /wp:paragraph --><!-- wp:heading {"level":3} --><h3>Our Mission</h3><!-- /wp:heading --><!-- wp:paragraph --><p>Share “Omotenashi” with the world.</p><!-- /wp:paragraph --><!-- wp:heading {"level":3} --><h3>Our Core Value</h3><!-- /wp:heading --><!-- wp:paragraph --><p>“If I were the guest…”<br>To provide guests with the hospitality you would want to receive as a guest.</p><!-- /wp:paragraph -->' ) );
+    update_post_meta( $jsc_pages['about'], 'jsc_principles_seeded', 1 );
+}
+
