@@ -40,6 +40,8 @@ add_action( 'customize_register', function ( $customizer ) {
     $fields = array(
         'brand' => array( 'Brand name', 'Plan Do See Global Inc.' ),
         'tagline' => array( 'Brand subtitle', 'RECRUITING' ),
+        'home_heading' => array( 'Home hero heading', 'Find Your Dream Jobs' ),
+        'home_description' => array( 'Home hero description', 'The secret behind our company is simple: to always put ourselves in the other person’s shoes—employee, guest or customer. This allows us to see the world through their eyes, anticipate their needs and better understand their feelings.' ),
     );
     foreach ( $fields as $key => $field ) {
         $customizer->add_setting( 'jsc_' . $key, array( 'default' => $field[1], 'sanitize_callback' => 'sanitize_text_field' ) );
@@ -91,7 +93,7 @@ function jsc_jobs( $args = array() ) {
 }
 
 function jsc_news( $args = array() ) {
-    return new WP_Query( wp_parse_args( $args, array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 4, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC' ), 'ignore_sticky_posts' => true ) ) );
+    return new WP_Query( wp_parse_args( $args, array( 'post_type' => 'post', 'post_status' => 'publish', 'category_name' => 'pds-news', 'posts_per_page' => 4, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC' ), 'ignore_sticky_posts' => true ) ) );
 }
 
 function jsc_cards( $query, $kind ) {

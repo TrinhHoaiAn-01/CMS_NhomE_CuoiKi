@@ -1,7 +1,7 @@
 <?php /** Shared newsletter and footer. */ ?>
 <section class="jsc-newsletter" aria-labelledby="newsletter-heading">
 <div class="jsc-newsletter-inner">
-<h2 id="newsletter-heading">Subscribe To<br>Our Newsletter</h2>
+<h2 id="newsletter-heading">Subscribe To<br> Our Newsletter</h2>
 <form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" class="jsc-newsletter-form">
 <input type="hidden" name="action" value="jsc_subscribe">
 <?php wp_nonce_field( 'jsc_subscribe', 'jsc_nonce' ); ?>
