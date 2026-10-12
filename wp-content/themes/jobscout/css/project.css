@@ -13,3 +13,5 @@
 .jsc-about-vision h3{font-size:21px;margin-bottom:7px}.jsc-about-vision p{font-size:18px;line-height:1.55;margin-bottom:30px}.jsc-about-vision p:last-child{margin-bottom:0}
 
 .jsc-about-vision-grid{display:grid;grid-template-columns:480px 1fr;gap:60px;align-items:center}.jsc-about-vision-grid figure img{width:100%;height:400px;object-fit:cover}.jsc-about-vision{padding-bottom:80px}.jsc-about-vision .jsc-title{margin-bottom:55px}
+
+.jsc-about-properties{background:#fff;text-align:center;padding:48px 24px 50px}.jsc-about-properties .jsc-container{max-width:880px;width:100%}.jsc-about-properties h2{font-size:20px;color:#df6307;margin-bottom:20px}.jsc-about-properties p{font-size:18px;line-height:1.5;margin-bottom:28px}.jsc-about-properties p:last-child{margin-bottom:0}

@@ -39,3 +39,9 @@ if ( ! get_post_meta( $jsc_pages['about'], 'jsc_principles_seeded', true ) ) {
     update_post_meta( $jsc_pages['about'], 'jsc_principles_seeded', 1 );
 }
 
+
+
+if ( ! metadata_exists( 'post', $jsc_pages['about'], 'jsc_properties' ) ) {
+    update_post_meta( $jsc_pages['about'], 'jsc_properties', "Plan Do See developed and operates 17 properties worldwide including 3 award-winning resorts in Japan; 17 restaurants of diverse cuisines in cities including New York, Miami and Los Angeles, and other countries including Japan, Indonesia, Malaysia and Bali.\n\nEach venue carries its own concept and design. Many of them are originally historical landmarks that were loved by the local people." );
+}
+

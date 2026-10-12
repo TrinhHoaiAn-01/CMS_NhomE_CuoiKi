@@ -6,4 +6,6 @@
 <div class="jsc-about-vision-grid"><figure><?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'large' ); } else { ?><img src="<?php echo esc_url( jsc_asset( 'torii.jpg' ) ); ?>" alt="Red torii gate standing in the water in Japan" width="480" height="400"><?php } ?></figure>
 <div class="jsc-about-principles"><?php while ( have_posts() ) : the_post(); the_content(); endwhile; ?></div></div>
 </div></section>
+<section class="jsc-about-properties" id="properties"><div class="jsc-container"><h2>Hotels, restaurants, banquets/weddings management</h2>
+<?php echo wp_kses_post( wpautop( get_post_meta( get_queried_object_id(), 'jsc_properties', true ) ) ); ?></div></section>
 </main><?php get_footer(); ?>
