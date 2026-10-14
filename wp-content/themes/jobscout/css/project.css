@@ -23,3 +23,5 @@
 .jsc-created{color:#767676}.jsc-meta,.jsc-highlights{color:#707070}.jsc-read-more{color:#b84b00}.jsc-hero-copy a:focus-visible,.jsc-career a:focus-visible,.jsc-newsletter :focus-visible{outline-color:#fff;box-shadow:0 0 0 6px #302925}.jsc-form-message{font-weight:600}.jsc-menu-toggle:focus-visible{outline-offset:3px}.jsc-newsletter input:invalid:not(:placeholder-shown){box-shadow:inset 0 -3px #b42318}
 /* Final Home reference corrections: card rhythm and newsletter strip height. */
 @media(min-width:1101px){.jsc-top-jobs{padding-bottom:64px}.jsc-highlights{line-height:1.5}.jsc-home-news .jsc-news-copy p{-webkit-line-clamp:3}.jsc-home-news .jsc-title{margin-bottom:32px}.jsc-newsletter{padding-top:21px;padding-bottom:21px}.jsc-hero-copy{transform:translateY(6px)}}
+
+.jsc-news-hero{background-image:url(../images/project/news-banner.png)}
