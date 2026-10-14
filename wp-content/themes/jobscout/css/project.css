@@ -27,3 +27,5 @@
 .jsc-news-hero{background-image:url(../images/project/news-banner.png)}
 
 .jsc-news-archive .jsc-news-grid{row-gap:50px}.jsc-news-archive .jsc-news-card{min-height:240px}.jsc-news-archive .jsc-news-image{height:200px;align-self:center}.jsc-news-archive .jsc-news-copy p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.jsc-news-archive .jsc-news-copy h3{line-height:1.4}
+
+.jsc-pagination{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:40px}.jsc-pagination .page-numbers{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;background:#fff;border:1px solid #ccc;padding:8px 14px}.jsc-pagination .current{background:var(--orange);color:#fff;border-color:var(--orange)}
