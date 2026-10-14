@@ -67,3 +67,22 @@ foreach ( require __DIR__ . '/project-news.php' as $order => $story ) {
     update_post_meta( $id, 'jsc_image', $image );
     update_post_meta( $id, 'jsc_location', 'Ho Chi Minh City' );
 }
+
+
+if ( ! get_post_meta( $jsc_pages['about'], 'jsc_principles_seeded', true ) ) {
+    wp_update_post( array( 'ID' => $jsc_pages['about'], 'post_content' => '<!-- wp:heading {"level":3} --><h3>Our Vision</h3><!-- /wp:heading --><!-- wp:paragraph --><p>Create hotels and restaurants around the world that offer memorable experiences while building a lasting, positive relationship together with our guests, partners, team members and communities.</p><!-- /wp:paragraph --><!-- wp:heading {"level":3} --><h3>Our Mission</h3><!-- /wp:heading --><!-- wp:paragraph --><p>Share “Omotenashi” with the world.</p><!-- /wp:paragraph --><!-- wp:heading {"level":3} --><h3>Our Core Value</h3><!-- /wp:heading --><!-- wp:paragraph --><p>“If I were the guest…”<br>To provide guests with the hospitality you would want to receive as a guest.</p><!-- /wp:paragraph -->' ) );
+    update_post_meta( $jsc_pages['about'], 'jsc_principles_seeded', 1 );
+}
+
+
+
+if ( ! metadata_exists( 'post', $jsc_pages['about'], 'jsc_properties' ) ) {
+    update_post_meta( $jsc_pages['about'], 'jsc_properties', "Plan Do See developed and operates 17 properties worldwide including 3 award-winning resorts in Japan; 17 restaurants of diverse cuisines in cities including New York, Miami and Los Angeles, and other countries including Japan, Indonesia, Malaysia and Bali.\n\nEach venue carries its own concept and design. Many of them are originally historical landmarks that were loved by the local people." );
+}
+
+
+
+foreach ( array( 'founded' => 'April 1993', 'office' => 'Marunouchi 2-1-1, Chiyoda, Tokyo', 'capital' => '100,000,000 JPY', 'ceo' => 'Yutaka Noda', 'employees' => 'Full time: 830 / Total: 1,600' ) as $key => $value ) {
+    if ( ! metadata_exists( 'post', $jsc_pages['about'], 'jsc_' . $key ) ) { update_post_meta( $jsc_pages['about'], 'jsc_' . $key, $value ); }
+}
+
