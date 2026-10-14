@@ -78,3 +78,12 @@ foreach ( require __DIR__ . '/project-news-additional.php' as $order => $story )
     update_post_meta( $id, 'jsc_location', 'Ho Chi Minh City' );
 }
 
+
+
+foreach ( array( 'project-development' => 'Project Development', 'restaurant-hotel-management' => 'Hotel Operations', 'hospitality-consulting' => 'Hospitality Consulting', 'venue-interior-design' => 'Design' ) as $slug => $category_name ) {
+    $story = get_page_by_path( $slug, OBJECT, 'post' );
+    $term = term_exists( $category_name, 'category' );
+    if ( ! $term ) { $term = wp_insert_term( $category_name, 'category', array( 'parent' => $news_category->term_id ) ); }
+    if ( $story && ! is_wp_error( $term ) ) { wp_set_post_categories( $story->ID, array( (int) $term['term_id'] ), true ); }
+}
+
