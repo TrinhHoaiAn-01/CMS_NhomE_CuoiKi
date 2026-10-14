@@ -21,3 +21,5 @@
 @media(min-width:1101px){.jsc-about-vision{padding-top:60px;min-height:644px}.jsc-about-properties{min-height:300px;display:flex;align-items:center}.jsc-about-profile{min-height:550px;padding-top:60px;padding-bottom:80px}}
 
 @media(min-width:701px) and (max-width:1100px){.jsc-about-vision-grid{grid-template-columns:44% 1fr;gap:36px}.jsc-about-vision-grid figure img{height:390px}.jsc-profile-grid{grid-template-columns:1fr 46%;gap:36px}.jsc-profile-grid>img{width:100%;height:380px}.jsc-about-vision{padding-bottom:60px}.jsc-about-vision .jsc-title{margin-bottom:36px}}
+
+@media(max-width:700px){.jsc-page-hero{height:280px}.jsc-page-hero h1{font-size:30px}.jsc-about-vision-grid,.jsc-profile-grid{grid-template-columns:1fr;gap:30px}.jsc-about-vision-grid figure img{height:auto;aspect-ratio:6/5}.jsc-about-vision .jsc-title{margin-bottom:30px}.jsc-about-vision p,.jsc-about-properties p,.jsc-profile-grid dd{font-size:17px}.jsc-about-vision{padding-bottom:45px}.jsc-about-properties{padding:40px 24px}.jsc-about-profile{padding:45px 0}.jsc-profile-grid>img{width:100%;height:auto;aspect-ratio:6/5}.jsc-profile-grid dl>div+div{margin-top:24px}}
