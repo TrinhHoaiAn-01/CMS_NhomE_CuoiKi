@@ -67,3 +67,14 @@ foreach ( require __DIR__ . '/project-news.php' as $order => $story ) {
     update_post_meta( $id, 'jsc_image', $image );
     update_post_meta( $id, 'jsc_location', 'Ho Chi Minh City' );
 }
+
+
+foreach ( require __DIR__ . '/project-news-additional.php' as $order => $story ) {
+    list( $slug, $title, $image, $excerpt, $body ) = $story;
+    if ( get_page_by_path( $slug, OBJECT, 'post' ) ) { continue; }
+    $id = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'post_excerpt' => $excerpt, 'menu_order' => $order + 4, 'post_date' => '2022-10-19 09:00:00', 'post_content' => '<!-- wp:paragraph --><p>' . esc_html( $body ) . '</p><!-- /wp:paragraph -->', 'post_category' => array( $news_category->term_id ) ), true );
+    if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
+    update_post_meta( $id, 'jsc_image', $image );
+    update_post_meta( $id, 'jsc_location', 'Ho Chi Minh City' );
+}
+
