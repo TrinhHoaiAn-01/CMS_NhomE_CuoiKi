@@ -16,6 +16,6 @@ $jobs = function_exists( 'get_job_listings' ) ? get_job_listings( array( 'posts_
 if ( $keywords || $location ) : ?>
 <details class="jsc-filter-panel" open><summary>Refine your search</summary><?php get_template_part( 'template-parts/project-job-search' ); ?></details>
 <p class="jsc-results-count" role="status"><?php echo esc_html( $jobs->found_posts ); ?> jobs found<?php if ( $keywords ) { echo ' for “' . esc_html( $keywords ) . '”'; } ?><?php if ( $location ) { echo ' in ' . esc_html( $location ); } ?>. <a href="<?php echo esc_url( jsc_url( 'jobs' ) ); ?>">Clear search</a></p>
-<?php endif; jsc_cards( $jobs, 'job' ); ?>
+<?php endif; if ( $jobs->have_posts() ) { jsc_cards( $jobs, 'job' ); } else { ?><div class="jsc-empty"><h3>No jobs match your search</h3><p>Try another keyword or location, or <a href="<?php echo esc_url( jsc_url( 'jobs' ) ); ?>">browse all jobs</a>.</p></div><?php } ?>
 <?php if ( $jobs->found_posts > $job_limit ) : ?><div class="jsc-actions"><a class="jsc-button outline jsc-load-more" href="<?php echo esc_url( add_query_arg( array( 'job_page' => $job_page + 1, 'job_order' => $job_order, 'search_keywords' => $keywords, 'search_location' => $location ), jsc_url( 'jobs' ) ) . '#jobs-results' ); ?>">Load More Jobs</a></div><?php endif; ?>
 </div></section></main><?php get_footer(); ?>
