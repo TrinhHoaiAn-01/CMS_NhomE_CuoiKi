@@ -29,3 +29,5 @@
 .jsc-filter-panel{margin-bottom:30px}.jsc-filter-panel summary{cursor:pointer;font-weight:600}.jsc-filter-panel .jsc-job-search{background:#e6e6e6}.jsc-results-count{margin-bottom:25px;font-size:17px}.jsc-results-count a{color:#b84b00;text-decoration:underline}
 
 .jsc-archive-toolbar{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:36px}.jsc-archive-toolbar .jsc-title{margin:0}.jsc-sort-form{display:flex;gap:10px;align-items:center}.jsc-sort-form select{height:46px;width:205px;font-size:17px;background:#fff}.jsc-sort-submit{min-height:46px;padding:8px 16px}.jsc-js .jsc-sort-submit{display:none}
+
+@media(min-width:1101px){.jsc-jobs-archive>.jsc-section{padding-top:60px;padding-bottom:70px}.jsc-jobs-archive .jsc-job-card{min-height:242px}.jsc-jobs-archive .jsc-grid{gap:28px 30px}.jsc-jobs-archive .jsc-actions{margin-top:48px}}
