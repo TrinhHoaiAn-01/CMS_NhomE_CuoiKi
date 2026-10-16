@@ -35,3 +35,5 @@
 @media(min-width:701px) and (max-width:1100px){.jsc-archive-toolbar{gap:20px}.jsc-jobs-archive .jsc-grid{gap:24px}.jsc-jobs-archive .jsc-job-search{flex-wrap:wrap}.jsc-jobs-archive .jsc-job-search .jsc-search-field{flex-basis:55%}.jsc-jobs-archive .jsc-job-search button{flex-basis:100%}}
 
 @media(max-width:700px){.jsc-archive-toolbar{align-items:flex-start;gap:18px;margin-bottom:28px}.jsc-archive-toolbar .jsc-title{font-size:28px}.jsc-sort-form select{width:150px;height:44px;font-size:16px;padding:0 10px}.jsc-filter-panel .jsc-job-search{padding:12px}.jsc-results-count{font-size:16px}.jsc-jobs-archive>.jsc-section{padding-bottom:50px}}.jsc-empty h3{font-size:24px;margin-bottom:12px}.jsc-empty a{color:#b84b00;text-decoration:underline}
+/* Keep concise desktop summaries at the reference card height. Full text remains on each detail page. */
+@media(min-width:1101px){.jsc-jobs-archive .jsc-highlights{padding-left:5px}.jsc-jobs-archive .jsc-highlights li{list-style-position:inside;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.jsc-jobs-archive>.jsc-section{padding-bottom:61px}}
