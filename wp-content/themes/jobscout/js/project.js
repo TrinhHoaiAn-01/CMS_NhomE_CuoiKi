@@ -33,3 +33,5 @@ if (menuToggle && navigation) {
     });
     window.matchMedia('(max-width: 700px)').addEventListener('change', closeMenu);
 }
+
+document.querySelectorAll('.jsc-sort-form select').forEach(select => select.addEventListener('change', () => select.form.requestSubmit()));

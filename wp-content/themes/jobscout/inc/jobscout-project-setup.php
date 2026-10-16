@@ -106,3 +106,15 @@ foreach ( array( 'project-development' => 'Project Development', 'restaurant-hot
     if ( $story && ! is_wp_error( $term ) ) { wp_set_post_categories( $story->ID, array( (int) $term['term_id'] ), true ); }
 }
 
+
+
+foreach ( require __DIR__ . '/project-jobs-additional.php' as $order => $job ) {
+    list( $slug, $title, $company, $city, $category, $logo, $intro ) = $job;
+    if ( get_page_by_path( $slug, OBJECT, 'job_listing' ) ) { continue; }
+    $id = wp_insert_post( array( 'post_type' => 'job_listing', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'menu_order' => $order + 6, 'post_date' => '2022-10-19 09:00:00', 'post_content' => '<h2>Overview about Company</h2><p>' . esc_html( $intro ) . '</p>', 'post_excerpt' => $intro ), true );
+    if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
+    foreach ( array( '_company_name' => $company, '_company_logo' => jsc_asset( 'company-' . $logo . '.jpg' ), '_job_location' => $city, '_filled' => '0', '_featured' => '0', '_application' => add_query_arg( 'job', $id, jsc_url( 'contact' ) ) . '#apply', 'jsc_highlights' => $intro . "\nWork with a collaborative team focused on guest care\nDevelop practical hospitality and communication skills" ) as $key => $value ) { update_post_meta( $id, $key, $value ); }
+    wp_set_object_terms( $id, 'Fulltime', 'job_listing_type' );
+    wp_set_object_terms( $id, $category, 'job_listing_category' );
+}
+

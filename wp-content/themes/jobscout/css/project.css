@@ -54,3 +54,17 @@
 
 @media(max-width:700px){.jsc-news-archive .jsc-news-grid{gap:24px}.jsc-news-archive .jsc-news-card{min-height:0}.jsc-news-archive .jsc-news-image{height:auto;min-height:170px;align-self:stretch}.jsc-news-archive .jsc-news-copy h3{font-size:19px}.jsc-news-archive .jsc-news-copy p{-webkit-line-clamp:5}.jsc-pagination{margin-top:28px}.jsc-news-archive>.jsc-section{padding-bottom:45px}}@media(max-width:380px){.jsc-news-archive .jsc-news-image{height:220px;min-height:0}}
 .jsc-news-archive .jsc-news-card:focus-within{outline:2px solid #b84b00;outline-offset:3px}.jsc-news-archive .jsc-news-card a:hover{text-decoration:underline;text-underline-offset:3px}
+
+.jsc-jobs-hero{background-image:url(../images/project/jobs-banner.png)}.jsc-jobs-archive .jsc-title{text-align:left}
+
+.jsc-filter-panel{margin-bottom:30px}.jsc-filter-panel summary{cursor:pointer;font-weight:600}.jsc-filter-panel .jsc-job-search{background:#e6e6e6}.jsc-results-count{margin-bottom:25px;font-size:17px}.jsc-results-count a{color:#b84b00;text-decoration:underline}
+
+.jsc-archive-toolbar{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:36px}.jsc-archive-toolbar .jsc-title{margin:0}.jsc-sort-form{display:flex;gap:10px;align-items:center}.jsc-sort-form select{height:46px;width:205px;font-size:17px;background:#fff}.jsc-sort-submit{min-height:46px;padding:8px 16px}.jsc-js .jsc-sort-submit{display:none}
+
+@media(min-width:1101px){.jsc-jobs-archive>.jsc-section{padding-top:60px;padding-bottom:70px}.jsc-jobs-archive .jsc-job-card{min-height:242px}.jsc-jobs-archive .jsc-grid{gap:28px 30px}.jsc-jobs-archive .jsc-actions{margin-top:48px}}
+
+@media(min-width:701px) and (max-width:1100px){.jsc-archive-toolbar{gap:20px}.jsc-jobs-archive .jsc-grid{gap:24px}.jsc-jobs-archive .jsc-job-search{flex-wrap:wrap}.jsc-jobs-archive .jsc-job-search .jsc-search-field{flex-basis:55%}.jsc-jobs-archive .jsc-job-search button{flex-basis:100%}}
+
+@media(max-width:700px){.jsc-archive-toolbar{align-items:flex-start;gap:18px;margin-bottom:28px}.jsc-archive-toolbar .jsc-title{font-size:28px}.jsc-sort-form select{width:150px;height:44px;font-size:16px;padding:0 10px}.jsc-filter-panel .jsc-job-search{padding:12px}.jsc-results-count{font-size:16px}.jsc-jobs-archive>.jsc-section{padding-bottom:50px}}.jsc-empty h3{font-size:24px;margin-bottom:12px}.jsc-empty a{color:#b84b00;text-decoration:underline}
+/* Keep concise desktop summaries at the reference card height. Full text remains on each detail page. */
+@media(min-width:1101px){.jsc-jobs-archive .jsc-highlights{padding-left:5px}.jsc-jobs-archive .jsc-highlights li{list-style-position:inside;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.jsc-jobs-archive>.jsc-section{padding-bottom:61px}}
