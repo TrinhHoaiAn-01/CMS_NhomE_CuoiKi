@@ -110,3 +110,13 @@ add_action( 'init', function () {
     add_post_type_support( 'post', 'custom-fields' );
     add_post_type_support( 'page', 'custom-fields' );
 } );
+
+
+// Keep the section navigation active while reading a native article or job.
+add_filter( 'nav_menu_css_class', function ( $classes, $item ) {
+    $section = is_singular( 'job_listing' ) ? 'jobs' : ( is_singular( 'post' ) ? 'news' : '' );
+    $page = $section ? get_page_by_path( $section ) : null;
+    if ( $page && (int) $item->object_id === $page->ID ) { $classes[] = 'current-menu-item'; }
+    return array_unique( $classes );
+}, 10, 2 );
+

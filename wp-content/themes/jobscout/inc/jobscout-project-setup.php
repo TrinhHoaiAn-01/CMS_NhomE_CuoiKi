@@ -86,3 +86,23 @@ foreach ( array( 'founded' => 'April 1993', 'office' => 'Marunouchi 2-1-1, Chiyo
     if ( ! metadata_exists( 'post', $jsc_pages['about'], 'jsc_' . $key ) ) { update_post_meta( $jsc_pages['about'], 'jsc_' . $key, $value ); }
 }
 
+
+
+foreach ( require __DIR__ . '/project-news-additional.php' as $order => $story ) {
+    list( $slug, $title, $image, $excerpt, $body ) = $story;
+    if ( get_page_by_path( $slug, OBJECT, 'post' ) ) { continue; }
+    $id = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'post_excerpt' => $excerpt, 'menu_order' => $order + 4, 'post_date' => '2022-10-19 09:00:00', 'post_content' => '<!-- wp:paragraph --><p>' . esc_html( $body ) . '</p><!-- /wp:paragraph -->', 'post_category' => array( $news_category->term_id ) ), true );
+    if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
+    update_post_meta( $id, 'jsc_image', $image );
+    update_post_meta( $id, 'jsc_location', 'Ho Chi Minh City' );
+}
+
+
+
+foreach ( array( 'project-development' => 'Project Development', 'restaurant-hotel-management' => 'Hotel Operations', 'hospitality-consulting' => 'Hospitality Consulting', 'venue-interior-design' => 'Design' ) as $slug => $category_name ) {
+    $story = get_page_by_path( $slug, OBJECT, 'post' );
+    $term = term_exists( $category_name, 'category' );
+    if ( ! $term ) { $term = wp_insert_term( $category_name, 'category', array( 'parent' => $news_category->term_id ) ); }
+    if ( $story && ! is_wp_error( $term ) ) { wp_set_post_categories( $story->ID, array( (int) $term['term_id'] ), true ); }
+}
+
