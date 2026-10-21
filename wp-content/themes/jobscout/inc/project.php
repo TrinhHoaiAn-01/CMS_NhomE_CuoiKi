@@ -136,3 +136,5 @@ function jsc_contact_phone( $key ) {
 
 
 require get_template_directory() . '/inc/project-forms.php';
+
+require get_template_directory() . '/inc/project-editor.php';

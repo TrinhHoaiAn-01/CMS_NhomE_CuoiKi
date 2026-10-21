@@ -8,7 +8,7 @@
 <label class="jsc-email-field"><span class="jsc-sr-only">Your email address</span><?php echo jsc_icon( 'mail' ); ?><input type="email" name="email" placeholder="Input your email address" required maxlength="254" autocomplete="email" aria-describedby="newsletter-privacy"></label>
 <label class="jsc-trap" aria-hidden="true">Leave blank<input name="website" tabindex="-1" autocomplete="off"></label>
 <button type="submit">Subscribe</button>
-<p class="jsc-sr-only" id="newsletter-privacy">Your email will be stored securely in WordPress for newsletter sign-ups.</p>
+<p class="jsc-sr-only" id="newsletter-privacy">Your email address will be saved for newsletter updates.</p>
 </form>
 </div>
 <?php if ( isset( $_GET['subscription'] ) ) : ?>
@@ -18,13 +18,7 @@
 <footer class="jsc-footer">
 <div class="jsc-footer-main">
 <a class="jsc-footer-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo esc_html( jsc_setting( 'brand', 'Plan Do See Global Inc.' ) ); ?></a>
-<nav aria-label="Footer navigation"><ul class="jsc-footer-menu">
-<li><a href="<?php echo esc_url( jsc_url( 'jobs' ) ); ?>">Jobs</a></li>
-<li><a href="<?php echo esc_url( jsc_url( 'about' ) . '#properties' ); ?>">Companies</a></li>
-<li><a href="<?php echo esc_url( jsc_url( 'news' ) ); ?>">Blog</a></li>
-<li><a href="<?php echo esc_url( jsc_url( 'about' ) ); ?>">About</a></li>
-<li><a href="<?php echo esc_url( jsc_url( 'contact' ) ); ?>">Contact</a></li>
-</ul></nav>
+<nav aria-label="Footer navigation"><?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'jsc-footer-menu', 'fallback_cb' => 'jsc_footer_menu' ) ); ?></nav>
 <div class="jsc-socials" aria-label="Social channels">
 <?php foreach ( array( 'facebook' => 'Facebook', 'google' => 'Google', 'line' => 'LINE', 'twitter' => 'Twitter' ) as $key => $label ) : $destination = jsc_setting( $key . '_url' ); ?>
 <?php if ( $destination ) : ?><a class="jsc-social <?php echo esc_attr( $key ); ?>" href="<?php echo esc_url( $destination ); ?>" aria-label="<?php echo esc_attr( $label ); ?>"><?php echo jsc_icon( $key ); ?></a>

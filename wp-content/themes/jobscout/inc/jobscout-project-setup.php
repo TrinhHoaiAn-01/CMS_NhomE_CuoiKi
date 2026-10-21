@@ -8,6 +8,10 @@ if ( ! post_type_exists( 'job_listing' ) ) {
 }
 update_option( 'job_manager_enable_categories', 1 );
 update_option( 'job_manager_enable_types', 1 );
+// Plugin options were changed after init. Make terms available to this CLI
+// process; subsequent requests use WP Job Manager's full taxonomy definitions.
+if ( ! taxonomy_exists( 'job_listing_category' ) ) { register_taxonomy( 'job_listing_category', 'job_listing', array( 'hierarchical' => true ) ); }
+if ( ! taxonomy_exists( 'job_listing_type' ) ) { register_taxonomy( 'job_listing_type', 'job_listing', array( 'hierarchical' => false ) ); }
 update_option( 'job_manager_enable_default_category_multiselect', 0 );
 update_option( 'job_manager_enable_registration', 1 );
 update_option( 'job_manager_user_requires_account', 1 );
@@ -32,7 +36,7 @@ if ( ! wp_get_nav_menu_object( 'JobScout Primary' ) ) {
     $locations['primary'] = $menu;
     set_theme_mod( 'nav_menu_locations', $locations );
 }
-WP_CLI::success( 'JobScout project configuration is ready.' );
+
 update_option( 'show_on_front', 'page' );
 update_option( 'page_on_front', $jsc_pages['home'] );
 if ( ! trim( get_post_field( 'post_content', $jsc_pages['home'] ) ) ) {
@@ -171,3 +175,25 @@ if ( ! trim( get_post_field( 'post_content', $jsc_pages['contact'] ) ) ) {
     wp_update_post( array( 'ID' => $jsc_pages['contact'], 'post_content' => '<!-- wp:paragraph --><p>60 Nguyen Van Thu, Ward Da Kao, District 1, Ho Chi Minh City, Viet Nam</p><!-- /wp:paragraph -->' ) );
 }
 
+
+
+if ( ! wp_get_nav_menu_object( 'JobScout Footer' ) ) {
+    $footer_menu = wp_create_nav_menu( 'JobScout Footer' );
+    foreach ( array( 'jobs' => 'Jobs', 'about#properties' => 'Companies', 'news' => 'Blog', 'about' => 'About', 'contact' => 'Contact' ) as $route => $label ) {
+        $parts = explode( '#', $route );
+        wp_update_nav_menu_item( $footer_menu, 0, array( 'menu-item-title' => $label, 'menu-item-type' => 'custom', 'menu-item-url' => jsc_url( $parts[0] ) . ( isset( $parts[1] ) ? '#' . $parts[1] : '' ), 'menu-item-status' => 'publish' ) );
+    }
+    $locations = get_theme_mod( 'nav_menu_locations', array() ); $locations['secondary'] = $footer_menu; set_theme_mod( 'nav_menu_locations', $locations );
+}
+$dashboard_id = jsc_setup_page( 'job-dashboard', 'Manage Jobs', '[job_dashboard]' );
+update_option( 'job_manager_job_dashboard_page_id', $dashboard_id );
+if ( ! get_option( 'jsc_default_content_reviewed' ) ) {
+    foreach ( array( 1 => 'hello-world', 2 => 'sample-page' ) as $id => $slug ) {
+        $default = get_post( $id );
+        if ( $default && $default->post_name === $slug && $default->post_modified <= '2026-10-07 23:59:59' ) { wp_trash_post( $id ); }
+    }
+    update_option( 'jsc_default_content_reviewed', 1 );
+}
+
+
+WP_CLI::success( 'JobScout project configuration is ready.' );

@@ -29,7 +29,7 @@ function jsc_application_submit() {
         $slug = hash( 'sha256', strtolower( $email ) . '|' . $job_id . '|' . $message );
         $existing = get_page_by_path( $slug, OBJECT, 'jsc_application' );
         if ( ! $existing ) {
-            $id = wp_insert_post( wp_slash( array( 'post_type' => 'jsc_application', 'post_status' => 'private', 'post_name' => $slug, 'post_title' => $name . ' — ' . ( $job_id ? get_the_title( $job_id ) : 'Employer callback request' ), 'post_content' => 'Email: ' . $email . "\nPhone: " . $phone . "\nCV link: " . $cv . "\n\n" . $message ) ), true );
+            $id = wp_insert_post( wp_slash( array( 'post_type' => 'jsc_application', 'post_status' => 'private', 'post_name' => $slug, 'post_title' => $name . ' — ' . ( $job_id ? get_post_field( 'post_title', $job_id ) : 'Employer callback request' ), 'post_content' => 'Email: ' . $email . "\nPhone: " . $phone . "\nCV link: " . $cv . "\n\n" . $message ) ), true );
             if ( is_wp_error( $id ) ) { wp_die( 'Your enquiry could not be saved. Please try again.', '', array( 'response' => 500, 'back_link' => true ) ); }
             update_post_meta( $id, 'jsc_job_id', $job_id ); update_post_meta( $id, 'jsc_email', $email );
         }

@@ -1,5 +1,5 @@
 <?php /** WP Job Manager archive using shared project cards. */ get_header(); ?>
-<main id="main-content" class="jsc-jobs-archive"><section class="jsc-page-hero jsc-jobs-hero"><h1>Career With Us</h1></section><section class="jsc-section" id="jobs-results"><div class="jsc-container">
+<main id="main-content" class="jsc-jobs-archive"><section class="jsc-page-hero jsc-jobs-hero"<?php echo jsc_background_style( 'jobs_hero_image' ); ?>><h1>Career With Us</h1></section><section class="jsc-section" id="jobs-results"><div class="jsc-container">
 <div class="jsc-archive-toolbar"><h2 class="jsc-title">All Jobs</h2>
 <form method="get" action="<?php echo esc_url( jsc_url( 'jobs' ) ); ?>" class="jsc-sort-form">
 <?php foreach ( array( 'search_keywords', 'search_location' ) as $key ) : if ( isset( $_GET[ $key ] ) ) : ?><input type="hidden" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( sanitize_text_field( wp_unslash( $_GET[ $key ] ) ) ); ?>"><?php endif; endforeach; ?>

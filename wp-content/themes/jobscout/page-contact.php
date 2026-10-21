@@ -1,5 +1,5 @@
 <?php /** Editable contact page. */ get_header(); ?>
-<main id="main-content" class="jsc-contact"><section class="jsc-page-hero jsc-contact-hero"><h1>Contact Us</h1></section><section class="jsc-contact-address"><div class="jsc-container"><h2>Our Headquarters Address</h2><?php while ( have_posts() ) : the_post(); the_content(); endwhile; ?></div></section><section class="jsc-contact-columns"><div class="jsc-container jsc-contact-grid">
+<main id="main-content" class="jsc-contact"><section class="jsc-page-hero jsc-contact-hero"<?php echo jsc_background_style( 'contact_hero_image' ); ?>><h1>Contact Us</h1></section><section class="jsc-contact-address"><div class="jsc-container"><h2>Our Headquarters Address</h2><?php while ( have_posts() ) : the_post(); the_content(); endwhile; ?></div></section><section class="jsc-contact-columns"><div class="jsc-container jsc-contact-grid">
 <section class="jsc-contact-employers" aria-labelledby="employers-title"><h2 id="employers-title">For Employers</h2><p>Call our Sales Hotline</p>
 <div class="jsc-contact-method"><h3>Ho Chi Minh</h3><?php jsc_contact_phone( 'phone_hcm' ); ?></div>
 <div class="jsc-contact-method"><h3>Ha Noi</h3><?php jsc_contact_phone( 'phone_hanoi' ); ?></div>
