@@ -86,3 +86,5 @@
 .jsc-breadcrumbs ol{margin:0}.jsc-job-detail .jsc-rating{gap:12px}.jsc-job-detail .jsc-job-sidebar .jsc-sidebar-box:first-child{min-height:120px}
 
 .jsc-standard-content{background:#fff;padding:35px}.jsc-standard-content p{margin-bottom:20px}.jsc-standard-content a{color:#b84b00;text-decoration:underline}.jsc-standard-content input,.jsc-standard-content select,.jsc-standard-content textarea{max-width:100%}.jsc-standard-content input[type=checkbox],.jsc-standard-content input[type=radio]{height:auto}.jsc-standard-content fieldset{border:0;border-bottom:1px solid #ddd;padding:20px 0}.jsc-standard-content label{font-weight:600}
+
+.jsc-contact-hero{background-image:linear-gradient(#1c16146b,#1c16146b),url(../images/project/contact-hero.jpg);background-position:center 44%}
