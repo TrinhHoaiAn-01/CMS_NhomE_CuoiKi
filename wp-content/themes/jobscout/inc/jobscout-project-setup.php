@@ -134,3 +134,14 @@ foreach ( $all_jobs as $job_post ) {
 
 
 foreach ( $all_jobs as $job_post ) { if ( ! metadata_exists( 'post', $job_post->ID, 'jsc_rating' ) ) { update_post_meta( $job_post->ID, 'jsc_rating', '4.0' ); } }
+
+
+$editorial_posts = get_posts( array( 'post_type' => 'post', 'category_name' => 'pds-news', 'numberposts' => -1, 'post_status' => 'publish' ) );
+foreach ( $editorial_posts as $story_post ) {
+    if ( get_post_meta( $story_post->ID, 'jsc_article_intro_seeded', true ) ) { continue; }
+    $content = $story_post->post_content;
+    $content .= '<!-- wp:paragraph --><p>Our approach begins by listening. We take time to understand the people who will use a place, the team who will care for it and the neighbourhood it belongs to. Those conversations turn an idea into something useful, welcoming and connected to its surroundings.</p><!-- /wp:paragraph --><!-- jsc:first-image -->';
+    wp_update_post( array( 'ID' => $story_post->ID, 'post_content' => $content ) );
+    update_post_meta( $story_post->ID, 'jsc_article_intro_seeded', 1 );
+}
+
