@@ -90,3 +90,5 @@
 .jsc-news-detail .jsc-detail-buttons{justify-content:center}.jsc-news-detail .jsc-detail-image{object-fit:cover}.jsc-news-detail .jsc-meta a:hover{text-decoration:underline}
 
 .jsc-related-news{margin-top:50px}.jsc-related-news .jsc-news-grid{row-gap:70px}.jsc-related-news .jsc-news-image{height:200px;align-self:center}.jsc-related-news .jsc-news-card{min-height:240px}.jsc-related-news .jsc-news-copy p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+@media(min-width:1101px){.jsc-news-prose{min-height:1550px;padding:30px;line-height:1.65}.jsc-news-detail{padding-bottom:80px}.jsc-related-news .jsc-news-copy h3{line-height:1.4}.jsc-related-news .jsc-title{margin-bottom:50px}}
