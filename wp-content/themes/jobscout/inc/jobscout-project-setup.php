@@ -16,10 +16,16 @@ update_option( 'job_manager_enable_default_category_multiselect', 0 );
 update_option( 'job_manager_enable_registration', 1 );
 update_option( 'job_manager_user_requires_account', 1 );
 update_option( 'job_manager_submission_requires_approval', 1 );
+function jsc_content_owner() {
+    if ( get_current_user_id() ) { return get_current_user_id(); }
+    $owners = get_users( array( 'role' => 'administrator', 'number' => 1, 'orderby' => 'ID', 'order' => 'ASC', 'fields' => 'ID' ) );
+    if ( ! $owners ) { WP_CLI::error( 'An administrator account is required to own the project content.' ); }
+    return (int) $owners[0];
+}
 function jsc_setup_page( $slug, $title, $content = '' ) {
     $page = get_page_by_path( $slug );
     if ( $page ) { return $page->ID; }
-    return wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_name' => $slug, 'post_title' => $title, 'post_content' => $content ), true );
+    return wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_author' => jsc_content_owner(), 'post_name' => $slug, 'post_title' => $title, 'post_content' => $content ), true );
 }
 $jsc_pages = array();
 foreach ( array( 'home' => 'Home', 'jobs' => 'All Jobs', 'news' => 'News', 'about' => 'About', 'contact' => 'Contact Us', 'submit-job' => 'Submit a Job' ) as $slug => $title ) {
@@ -54,7 +60,7 @@ foreach ( require __DIR__ . '/project-jobs.php' as $order => $job ) {
         if ( ! wp_get_object_terms( $existing_job->ID, 'job_listing_type' ) ) { wp_set_object_terms( $existing_job->ID, 'Fulltime', 'job_listing_type' ); }
         continue;
     }
-    $id = wp_insert_post( array( 'post_type' => 'job_listing', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'menu_order' => $order, 'post_date' => '2022-10-20 09:00:00', 'post_content' => '<h2>Overview about Company</h2><p>' . esc_html( $intro ) . '</p>', 'post_excerpt' => $intro ), true );
+    $id = wp_insert_post( array( 'post_type' => 'job_listing', 'post_status' => 'publish', 'post_author' => jsc_content_owner(), 'post_title' => $title, 'post_name' => $slug, 'menu_order' => $order, 'post_date' => '2022-10-20 09:00:00', 'post_content' => '<h2>Overview about Company</h2><p>' . esc_html( $intro ) . '</p>', 'post_excerpt' => $intro ), true );
     if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
     foreach ( array( '_company_name' => $company, '_company_logo' => jsc_asset( 'company-' . $logo . '.jpg' ), '_job_location' => $city, '_filled' => '0', '_featured' => '1', '_application' => add_query_arg( 'job', $id, jsc_url( 'contact' ) ) . '#apply', 'jsc_highlights' => $highlights ) as $key => $value ) { update_post_meta( $id, $key, $value ); }
     wp_set_object_terms( $id, 'Fulltime', 'job_listing_type' );
@@ -66,7 +72,7 @@ $news_category = get_term_by( 'slug', 'pds-news', 'category' );
 foreach ( require __DIR__ . '/project-news.php' as $order => $story ) {
     list( $slug, $title, $image, $excerpt, $intro, $body ) = $story;
     if ( get_page_by_path( $slug, OBJECT, 'post' ) ) { continue; }
-    $id = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'post_excerpt' => $excerpt, 'menu_order' => $order, 'post_date' => '2022-10-20 09:00:00', 'post_content' => '<!-- wp:paragraph --><p>' . esc_html( $intro ) . '</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>' . esc_html( $body ) . '</p><!-- /wp:paragraph -->', 'post_category' => array( $news_category->term_id ) ), true );
+    $id = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_author' => jsc_content_owner(), 'post_title' => $title, 'post_name' => $slug, 'post_excerpt' => $excerpt, 'menu_order' => $order, 'post_date' => '2022-10-20 09:00:00', 'post_content' => '<!-- wp:paragraph --><p>' . esc_html( $intro ) . '</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>' . esc_html( $body ) . '</p><!-- /wp:paragraph -->', 'post_category' => array( $news_category->term_id ) ), true );
     if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
     update_post_meta( $id, 'jsc_image', $image );
     update_post_meta( $id, 'jsc_location', 'Ho Chi Minh City' );
@@ -95,7 +101,7 @@ foreach ( array( 'founded' => 'April 1993', 'office' => 'Marunouchi 2-1-1, Chiyo
 foreach ( require __DIR__ . '/project-news-additional.php' as $order => $story ) {
     list( $slug, $title, $image, $excerpt, $body ) = $story;
     if ( get_page_by_path( $slug, OBJECT, 'post' ) ) { continue; }
-    $id = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'post_excerpt' => $excerpt, 'menu_order' => $order + 4, 'post_date' => '2022-10-19 09:00:00', 'post_content' => '<!-- wp:paragraph --><p>' . esc_html( $body ) . '</p><!-- /wp:paragraph -->', 'post_category' => array( $news_category->term_id ) ), true );
+    $id = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_author' => jsc_content_owner(), 'post_title' => $title, 'post_name' => $slug, 'post_excerpt' => $excerpt, 'menu_order' => $order + 4, 'post_date' => '2022-10-19 09:00:00', 'post_content' => '<!-- wp:paragraph --><p>' . esc_html( $body ) . '</p><!-- /wp:paragraph -->', 'post_category' => array( $news_category->term_id ) ), true );
     if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
     update_post_meta( $id, 'jsc_image', $image );
     update_post_meta( $id, 'jsc_location', 'Ho Chi Minh City' );
@@ -115,7 +121,7 @@ foreach ( array( 'project-development' => 'Project Development', 'restaurant-hot
 foreach ( require __DIR__ . '/project-jobs-additional.php' as $order => $job ) {
     list( $slug, $title, $company, $city, $category, $logo, $intro ) = $job;
     if ( get_page_by_path( $slug, OBJECT, 'job_listing' ) ) { continue; }
-    $id = wp_insert_post( array( 'post_type' => 'job_listing', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'menu_order' => $order + 6, 'post_date' => '2022-10-19 09:00:00', 'post_content' => '<h2>Overview about Company</h2><p>' . esc_html( $intro ) . '</p>', 'post_excerpt' => $intro ), true );
+    $id = wp_insert_post( array( 'post_type' => 'job_listing', 'post_status' => 'publish', 'post_author' => jsc_content_owner(), 'post_title' => $title, 'post_name' => $slug, 'menu_order' => $order + 6, 'post_date' => '2022-10-19 09:00:00', 'post_content' => '<h2>Overview about Company</h2><p>' . esc_html( $intro ) . '</p>', 'post_excerpt' => $intro ), true );
     if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
     foreach ( array( '_company_name' => $company, '_company_logo' => jsc_asset( 'company-' . $logo . '.jpg' ), '_job_location' => $city, '_filled' => '0', '_featured' => '0', '_application' => add_query_arg( 'job', $id, jsc_url( 'contact' ) ) . '#apply', 'jsc_highlights' => $intro . "\nWork with a collaborative team focused on guest care\nDevelop practical hospitality and communication skills" ) as $key => $value ) { update_post_meta( $id, $key, $value ); }
     wp_set_object_terms( $id, 'Fulltime', 'job_listing_type' );
@@ -196,4 +202,19 @@ if ( ! get_option( 'jsc_default_content_reviewed' ) ) {
 }
 
 
+// Repair only unowned records seeded by this project. Existing ownership is preserved.
+$owned_project_ids = array_values( $jsc_pages );
+$owned_project_ids[] = $dashboard_id;
+foreach ( $all_jobs as $project_job ) {
+    if ( get_post_meta( $project_job->ID, 'jsc_details_seeded', true ) ) { $owned_project_ids[] = $project_job->ID; }
+}
+foreach ( $editorial_posts as $project_story ) {
+    if ( get_post_meta( $project_story->ID, 'jsc_article_intro_seeded', true ) ) { $owned_project_ids[] = $project_story->ID; }
+}
+foreach ( array_unique( $owned_project_ids ) as $project_id ) {
+    if ( 0 === (int) get_post_field( 'post_author', $project_id ) ) {
+        $ownership_result = wp_update_post( array( 'ID' => $project_id, 'post_author' => jsc_content_owner() ), true );
+        if ( is_wp_error( $ownership_result ) ) { WP_CLI::error( $ownership_result->get_error_message() ); }
+    }
+}
 WP_CLI::success( 'JobScout project configuration is ready.' );
