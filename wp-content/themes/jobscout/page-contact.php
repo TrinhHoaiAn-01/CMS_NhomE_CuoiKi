@@ -7,5 +7,5 @@
 </section>
 <section class="jsc-contact-jobseekers" aria-labelledby="jobseekers-title"><h2 id="jobseekers-title">For Jobseekers</h2><p>Ask a question on our <?php if ( jsc_setting( 'facebook_url' ) ) : ?><a href="<?php echo esc_url( jsc_setting( 'facebook_url' ) ); ?>">Facebook</a><?php else : ?><span class="jsc-unconfigured" title="Facebook address not supplied">Facebook</span><?php endif; ?> page<br>Read our <a href="<?php echo esc_url( jsc_url( 'news' ) ); ?>">blog posts</a> on interview and CV tips</p>
 <div class="jsc-contact-method"><h3>Call us at</h3><?php jsc_contact_phone( 'phone_jobs' ); ?></div></section>
-</div></section></main>
+</div></section><?php get_template_part( 'template-parts/project-application-form' ); ?></main>
 <?php get_footer(); ?>

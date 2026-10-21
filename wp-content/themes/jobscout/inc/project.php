@@ -134,3 +134,5 @@ function jsc_contact_phone( $key ) {
     else { echo '<span class="jsc-redacted" role="img" aria-label="Phone number redacted in supplied design" title="Phone number not supplied"></span>'; }
 }
 
+
+require get_template_directory() . '/inc/project-forms.php';
