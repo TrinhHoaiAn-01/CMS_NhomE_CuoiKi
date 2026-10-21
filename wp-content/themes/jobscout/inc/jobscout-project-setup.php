@@ -134,3 +134,9 @@ foreach ( $all_jobs as $job_post ) {
 
 
 foreach ( $all_jobs as $job_post ) { if ( ! metadata_exists( 'post', $job_post->ID, 'jsc_rating' ) ) { update_post_meta( $job_post->ID, 'jsc_rating', '4.0' ); } }
+
+
+if ( ! trim( get_post_field( 'post_content', $jsc_pages['contact'] ) ) ) {
+    wp_update_post( array( 'ID' => $jsc_pages['contact'], 'post_content' => '<!-- wp:paragraph --><p>60 Nguyen Van Thu, Ward Da Kao, District 1, Ho Chi Minh City, Viet Nam</p><!-- /wp:paragraph -->' ) );
+}
+
