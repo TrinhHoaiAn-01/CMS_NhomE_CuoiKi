@@ -132,3 +132,5 @@ foreach ( $all_jobs as $job_post ) {
     update_post_meta( $job_post->ID, 'jsc_details_seeded', 1 );
 }
 
+
+foreach ( $all_jobs as $job_post ) { if ( ! metadata_exists( 'post', $job_post->ID, 'jsc_rating' ) ) { update_post_meta( $job_post->ID, 'jsc_rating', '4.0' ); } }
