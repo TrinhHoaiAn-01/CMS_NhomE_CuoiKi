@@ -120,3 +120,9 @@ add_filter( 'nav_menu_css_class', function ( $classes, $item ) {
     return array_unique( $classes );
 }, 10, 2 );
 
+
+
+function jsc_breadcrumbs( $section, $section_label, $current ) {
+    echo '<nav class="jsc-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="' . esc_url( home_url( '/' ) ) . '">Home</a></li><li><a href="' . esc_url( jsc_url( $section ) ) . '">' . esc_html( $section_label ) . '</a></li><li aria-current="page">' . esc_html( $current ) . '</li></ol></nav>';
+}
+

@@ -118,3 +118,19 @@ foreach ( require __DIR__ . '/project-jobs-additional.php' as $order => $job ) {
     wp_set_object_terms( $id, $category, 'job_listing_category' );
 }
 
+
+
+$all_jobs = get_posts( array( 'post_type' => 'job_listing', 'numberposts' => -1, 'post_status' => 'publish' ) );
+foreach ( $all_jobs as $job_post ) {
+    if ( get_post_meta( $job_post->ID, 'jsc_details_seeded', true ) ) { continue; }
+    $intro = $job_post->post_excerpt;
+    $company = get_post_meta( $job_post->ID, '_company_name', true );
+    $content = '<h2>Overview about Company</h2><p>' . esc_html( $intro ) . ' At ' . esc_html( $company ) . ', we believe that hospitality begins with seeing the world through the eyes of another person. Our work brings together thoughtful service, a sense of place and respect for the communities around us. Every team member helps create a warm welcome and an experience that feels personal.</p><p>We work across departments to make each part of the guest journey feel natural. From planning the day to responding to an unexpected request, our teams communicate clearly and pay attention to the details. We value practical ideas, a willingness to learn and the care that colleagues show one another during a busy service.</p>';
+    $content .= '<h2>Our Key Skills</h2><p>This role calls for clear communication, thoughtful organisation and a strong commitment to guest care. You should be comfortable working with people from different backgrounds, listening carefully and finding practical solutions. Relevant experience in hospitality is valuable, along with attention to detail and the ability to work calmly as part of a team.</p><p>We look for people who take responsibility for their work and share what they know. A positive approach, respect for colleagues and the curiosity to keep improving are as important as technical skills.</p>';
+    $content .= '<h2>Why You’ll Love Working Here</h2><p>You will join colleagues who care about their craft and take pride in making people feel welcome. We encourage learning through daily practice, shared feedback and the opportunity to work alongside experienced hospitality professionals. Team members are invited to contribute ideas and help shape a better experience for guests and one another.</p><p>Each property has its own character, shaped by local culture, architecture and the people who bring it to life. Working here is a chance to understand that story and become part of it. The recruitment team can explain the working schedule, training, compensation and benefits that apply to this position during the selection process.</p>';
+    wp_update_post( array( 'ID' => $job_post->ID, 'post_content' => $content ) );
+    update_post_meta( $job_post->ID, 'jsc_details_seeded', 1 );
+}
+
+
+foreach ( $all_jobs as $job_post ) { if ( ! metadata_exists( 'post', $job_post->ID, 'jsc_rating' ) ) { update_post_meta( $job_post->ID, 'jsc_rating', '4.0' ); } }
