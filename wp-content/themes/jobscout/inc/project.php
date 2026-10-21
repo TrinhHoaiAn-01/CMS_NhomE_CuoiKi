@@ -126,3 +126,13 @@ function jsc_breadcrumbs( $section, $section_label, $current ) {
     echo '<nav class="jsc-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="' . esc_url( home_url( '/' ) ) . '">Home</a></li><li><a href="' . esc_url( jsc_url( $section ) ) . '">' . esc_html( $section_label ) . '</a></li><li aria-current="page">' . esc_html( $current ) . '</li></ol></nav>';
 }
 
+
+
+function jsc_contact_phone( $key ) {
+    $number = jsc_setting( $key );
+    if ( $number ) { echo '<a class="jsc-phone" href="' . esc_url( 'tel:' . preg_replace( '/[^+0-9]/', '', $number ) ) . '">' . esc_html( $number ) . '</a>'; }
+    else { echo '<span class="jsc-redacted" role="img" aria-label="Phone number redacted in supplied design" title="Phone number not supplied"></span>'; }
+}
+
+
+require get_template_directory() . '/inc/project-forms.php';

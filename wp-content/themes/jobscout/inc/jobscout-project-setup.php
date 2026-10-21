@@ -165,3 +165,9 @@ foreach ( $editorial_posts as $story_post ) {
     update_post_meta( $story_post->ID, 'jsc_article_photo_two', 1 );
 }
 
+
+
+if ( ! trim( get_post_field( 'post_content', $jsc_pages['contact'] ) ) ) {
+    wp_update_post( array( 'ID' => $jsc_pages['contact'], 'post_content' => '<!-- wp:paragraph --><p>60 Nguyen Van Thu, Ward Da Kao, District 1, Ho Chi Minh City, Viet Nam</p><!-- /wp:paragraph -->' ) );
+}
+

@@ -96,3 +96,23 @@
 @media(min-width:701px) and (max-width:1100px){.jsc-news-prose{max-width:76%;padding:28px}.jsc-related-news .jsc-news-grid{row-gap:40px}}@media(max-width:700px){.jsc-news-prose{max-width:none;min-height:0;padding:24px;overflow-wrap:anywhere}.jsc-news-prose .wp-block-image{margin:25px 0}.jsc-related-news{margin-top:40px}.jsc-related-news .jsc-news-grid{gap:24px}.jsc-related-news .jsc-news-card{min-height:0}.jsc-related-news .jsc-news-image{height:auto;min-height:170px;align-self:stretch}.jsc-related-news .jsc-news-copy p{-webkit-line-clamp:5}.jsc-related-news .jsc-title{font-size:28px}.jsc-news-detail .jsc-detail-heading h1{font-size:18px}}@media(max-width:380px){.jsc-related-news .jsc-news-image{height:220px;min-height:0}}
 
 @media(min-width:1101px){.jsc-related-news .jsc-title{margin-bottom:36px}}
+
+.jsc-standard-content{background:#fff;padding:35px}.jsc-standard-content p{margin-bottom:20px}.jsc-standard-content a{color:#b84b00;text-decoration:underline}.jsc-standard-content input,.jsc-standard-content select,.jsc-standard-content textarea{max-width:100%}.jsc-standard-content input[type=checkbox],.jsc-standard-content input[type=radio]{height:auto}.jsc-standard-content fieldset{border:0;border-bottom:1px solid #ddd;padding:20px 0}.jsc-standard-content label{font-weight:600}
+
+.jsc-contact-hero{background-image:linear-gradient(#1c16146b,#1c16146b),url(../images/project/contact-hero.jpg);background-position:center 44%}
+
+.jsc-contact-address{background:#fff;text-align:center;padding:45px 24px 50px;min-height:172px}.jsc-contact-address h2{font-size:21px;margin-bottom:20px}.jsc-contact-address p{font-size:18px;letter-spacing:.25px}
+
+.jsc-contact-columns{padding:60px 0 70px;min-height:483px;text-align:center}.jsc-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}.jsc-contact-grid h2,.jsc-contact-grid h3{font-size:21px;line-height:1.3;margin-bottom:8px}.jsc-contact-grid p{font-size:18px;line-height:1.5}.jsc-contact-method{margin-top:32px}.jsc-contact-method h3{margin-bottom:14px}.jsc-redacted{display:block;width:150px;height:14px;background:#080808;margin:10px auto}.jsc-phone{display:inline-block;font-size:19px;text-decoration:underline}.jsc-callback{margin-top:36px}.jsc-callback a:hover{text-decoration:underline}
+
+.jsc-contact-jobseekers p a,.jsc-unconfigured{color:#c55300;text-decoration:underline;text-underline-offset:3px}.jsc-unconfigured{cursor:help}.jsc-contact-jobseekers .jsc-contact-method{margin-top:34px}
+
+.jsc-application-section{background:#fff}.jsc-application-form{max-width:850px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}.jsc-application-form label{display:flex;flex-direction:column;gap:8px;font-size:17px;font-weight:600}.jsc-application-role,.jsc-application-message,.jsc-application-privacy{grid-column:1/-1}.jsc-application-role{font-size:23px;font-weight:600}.jsc-application-privacy{font-size:15px;color:#666}.jsc-application-form button{justify-self:start}.jsc-application-confirmation{max-width:850px;margin:auto;background:#f2f2f2;padding:35px}.jsc-application-confirmation h3{margin-bottom:12px}.jsc-application-confirmation a{display:inline-block;color:#b84b00;text-decoration:underline;margin-top:18px}
+
+@media(min-width:1101px){.jsc-contact-address{padding-top:45px;padding-bottom:50px}.jsc-contact-grid{gap:60px}.jsc-contact-columns{padding-top:60px;padding-bottom:70px}.jsc-contact-grid h2,.jsc-contact-grid h3{font-size:21px}.jsc-contact-hero{height:360px}}
+
+@media(min-width:701px) and (max-width:1100px){.jsc-contact-grid{gap:35px}.jsc-contact-columns{padding:50px 0 60px}.jsc-contact-grid p{font-size:17px}.jsc-contact-address{padding:40px 24px}.jsc-application-form{gap:20px}}
+
+@media(max-width:700px){.jsc-contact-hero{height:280px;background-position:53% center}.jsc-contact-address{padding:35px 20px;min-height:0}.jsc-contact-address h2{font-size:22px;margin-bottom:15px}.jsc-contact-address p{font-size:17px}.jsc-contact-grid{grid-template-columns:1fr;gap:44px}.jsc-contact-columns{padding:40px 0 50px;min-height:0}.jsc-contact-grid p{font-size:17px}.jsc-contact-grid h2,.jsc-contact-grid h3{font-size:21px}.jsc-contact-method{margin-top:26px}.jsc-callback{margin-top:30px}.jsc-application-form{grid-template-columns:1fr;gap:20px}.jsc-application-form input,.jsc-application-form textarea{width:100%}.jsc-application-form button{width:100%}.jsc-application-role{font-size:20px}.jsc-application-confirmation{padding:25px}.jsc-standard-content{padding:24px}}
+/* Final Contact corrections against the supplied 1440 × 1594 image. */
+@media(min-width:1101px){.jsc-contact-columns{padding-bottom:64px}.jsc-contact-hero h1{transform:translateY(-10px)}}
