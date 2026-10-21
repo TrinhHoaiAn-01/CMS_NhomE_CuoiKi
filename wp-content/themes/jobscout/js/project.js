@@ -35,3 +35,35 @@ if (menuToggle && navigation) {
 }
 
 document.querySelectorAll('.jsc-sort-form select').forEach(select => select.addEventListener('change', () => select.form.requestSubmit()));
+
+
+document.querySelectorAll('.jsc-share-button').forEach(button => {
+    button.addEventListener('click', async () => {
+        const url = button.dataset.shareUrl;
+        const status = button.parentElement.querySelector('.jsc-share-status');
+        const fallback = button.parentElement.querySelector('.jsc-share-fallback');
+        try {
+            if (navigator.share) {
+                await navigator.share({title: button.dataset.shareTitle, url});
+                status.textContent = 'Sharing complete.';
+            } else if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(url);
+                status.textContent = 'Page link copied.';
+                button.textContent = 'Link Copied';
+            } else {
+                fallback.hidden = false;
+                fallback.querySelector('input').focus();
+                fallback.querySelector('input').select();
+                status.textContent = 'Copy the selected page link to share.';
+            }
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                fallback.hidden = false;
+                fallback.querySelector('input').focus();
+                fallback.querySelector('input').select();
+                status.textContent = 'Copy this page link to share.';
+            }
+        }
+    });
+});
+
