@@ -86,3 +86,5 @@
 .jsc-breadcrumbs ol{margin:0}.jsc-job-detail .jsc-rating{gap:12px}.jsc-job-detail .jsc-job-sidebar .jsc-sidebar-box:first-child{min-height:120px}
 
 .jsc-news-prose{max-width:720px}.jsc-news-prose p{margin-bottom:20px}.jsc-news-prose>p:last-child{margin-bottom:0}.jsc-news-prose .wp-block-image{margin:32px 0}.jsc-news-prose .wp-block-image img{width:100%;height:auto}
+
+.jsc-news-detail .jsc-detail-buttons{justify-content:center}.jsc-news-detail .jsc-detail-image{object-fit:cover}.jsc-news-detail .jsc-meta a:hover{text-decoration:underline}
