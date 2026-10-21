@@ -145,3 +145,12 @@ foreach ( $editorial_posts as $story_post ) {
     update_post_meta( $story_post->ID, 'jsc_article_intro_seeded', 1 );
 }
 
+
+
+foreach ( $editorial_posts as $story_post ) {
+    if ( get_post_meta( $story_post->ID, 'jsc_article_photo_one', true ) ) { continue; }
+    $photo = '<!-- wp:image {"sizeSlug":"large"} --><figure class="wp-block-image size-large"><img src="' . esc_url( jsc_asset( 'street.jpg' ) ) . '" alt="A red corner restaurant on a quiet Japanese street" width="640" height="360"></figure><!-- /wp:image --><!-- jsc:middle-content -->';
+    wp_update_post( array( 'ID' => $story_post->ID, 'post_content' => str_replace( '<!-- jsc:first-image -->', $photo, get_post_field( 'post_content', $story_post->ID ) ) ) );
+    update_post_meta( $story_post->ID, 'jsc_article_photo_one', 1 );
+}
+
