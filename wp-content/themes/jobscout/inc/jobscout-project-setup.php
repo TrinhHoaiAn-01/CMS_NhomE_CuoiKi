@@ -134,3 +134,34 @@ foreach ( $all_jobs as $job_post ) {
 
 
 foreach ( $all_jobs as $job_post ) { if ( ! metadata_exists( 'post', $job_post->ID, 'jsc_rating' ) ) { update_post_meta( $job_post->ID, 'jsc_rating', '4.0' ); } }
+
+
+$editorial_posts = get_posts( array( 'post_type' => 'post', 'category_name' => 'pds-news', 'numberposts' => -1, 'post_status' => 'publish' ) );
+foreach ( $editorial_posts as $story_post ) {
+    if ( get_post_meta( $story_post->ID, 'jsc_article_intro_seeded', true ) ) { continue; }
+    $content = $story_post->post_content;
+    $content .= '<!-- wp:paragraph --><p>Our approach begins by listening. We take time to understand the people who will use a place, the team who will care for it and the neighbourhood it belongs to. Those conversations turn an idea into something useful, welcoming and connected to its surroundings.</p><!-- /wp:paragraph --><!-- jsc:first-image -->';
+    wp_update_post( array( 'ID' => $story_post->ID, 'post_content' => $content ) );
+    update_post_meta( $story_post->ID, 'jsc_article_intro_seeded', 1 );
+}
+
+
+
+foreach ( $editorial_posts as $story_post ) {
+    if ( get_post_meta( $story_post->ID, 'jsc_article_photo_one', true ) ) { continue; }
+    $photo = '<!-- wp:image {"sizeSlug":"large"} --><figure class="wp-block-image size-large"><img src="' . esc_url( jsc_asset( 'street.jpg' ) ) . '" alt="A red corner restaurant on a quiet Japanese street" width="640" height="360"></figure><!-- /wp:image --><!-- jsc:middle-content -->';
+    wp_update_post( array( 'ID' => $story_post->ID, 'post_content' => str_replace( '<!-- jsc:first-image -->', $photo, get_post_field( 'post_content', $story_post->ID ) ) ) );
+    update_post_meta( $story_post->ID, 'jsc_article_photo_one', 1 );
+}
+
+
+
+foreach ( $editorial_posts as $story_post ) {
+    if ( get_post_meta( $story_post->ID, 'jsc_article_photo_two', true ) ) { continue; }
+    $middle = '<!-- wp:paragraph --><p>A successful experience brings many disciplines together. Design gives a space its character, operations make it practical and service gives it warmth. When those conversations happen together, the result feels more natural to guests and easier for teams to deliver. We encourage people to notice how a place is used throughout the day and to share ideas that make it work better.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Local culture is a starting point rather than a finishing touch. The materials we choose, the food we serve and the stories we share can all help guests build a connection with the destination. Working with local makers and understanding the history of a neighbourhood gives a project depth. Small decisions made with care can become the details people remember long after their visit.</p><!-- /wp:paragraph -->';
+    $middle .= '<!-- wp:image {"sizeSlug":"large"} --><figure class="wp-block-image size-large"><img src="' . esc_url( jsc_asset( 'sakura.jpg' ) ) . '" alt="Warm lanterns beneath cherry blossoms at dusk in Japan" width="640" height="360"></figure><!-- /wp:image -->';
+    $middle .= '<!-- wp:paragraph --><p>Hospitality continues to evolve, but its purpose stays personal. We want people to feel welcome, comfortable and understood. That means staying curious, learning from feedback and making room for different perspectives. Whether we are developing a new venue or improving an existing service, we return to a simple question: what would we hope to experience if we were the guest? The answer helps us choose the next thoughtful step.</p><!-- /wp:paragraph -->';
+    wp_update_post( array( 'ID' => $story_post->ID, 'post_content' => str_replace( '<!-- jsc:middle-content -->', $middle, get_post_field( 'post_content', $story_post->ID ) ) ) );
+    update_post_meta( $story_post->ID, 'jsc_article_photo_two', 1 );
+}
+
