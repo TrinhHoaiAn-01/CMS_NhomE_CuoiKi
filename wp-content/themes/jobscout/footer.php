@@ -8,11 +8,20 @@
 <label class="jsc-email-field"><span class="jsc-sr-only">Your email address</span><?php echo jsc_icon( 'mail' ); ?><input type="email" name="email" placeholder="Input your email address" required maxlength="254" autocomplete="email" aria-describedby="newsletter-privacy"></label>
 <label class="jsc-trap" aria-hidden="true">Leave blank<input name="website" tabindex="-1" autocomplete="off"></label>
 <button type="submit">Subscribe</button>
-<p class="jsc-sr-only" id="newsletter-privacy">Your email address will be saved for newsletter updates.</p>
+<p class="jsc-sr-only" id="newsletter-privacy">Subscribe to receive a confirmation email and updates when we publish new posts. You can unsubscribe at any time.</p>
 </form>
 </div>
 <?php if ( isset( $_GET['subscription'] ) ) : ?>
-<p class="jsc-form-message" role="status"><?php echo 'saved' === sanitize_key( wp_unslash( $_GET['subscription'] ) ) ? 'Thank you. Your newsletter sign-up has been saved.' : 'Please enter a valid email address and try again.'; ?></p>
+<?php
+$subscription_messages = array(
+    'saved' => 'Thank you for subscribing! If this is your first sign-up, check your inbox for a confirmation email.',
+    'mail_pending' => 'You are subscribed. Your confirmation email is delayed; we will retry shortly.',
+    'busy' => 'Your sign-up is being processed. Please try again shortly.',
+    'limited' => 'Too many sign-up attempts. Please try again in an hour.',
+);
+$subscription_result = is_string( $_GET['subscription'] ) ? sanitize_key( wp_unslash( $_GET['subscription'] ) ) : '';
+?>
+<p class="jsc-form-message" role="status"><?php echo esc_html( $subscription_messages[ $subscription_result ] ?? 'Please enter a valid email address and try again.' ); ?></p>
 <?php endif; ?>
 </section>
 <footer class="jsc-footer">

@@ -67,26 +67,7 @@ add_action( 'customize_register', function ( $customizer ) {
         $customizer->add_control( 'jsc_' . $name . '_url', array( 'label' => ucfirst( $name ) . ' URL', 'section' => 'jsc_project', 'type' => 'url' ) );
     }
 } );
-add_action( 'init', function () {
-    register_post_type( 'jsc_subscriber', array( 'labels' => array( 'name' => 'Newsletter Sign-ups', 'singular_name' => 'Newsletter Sign-up' ), 'public' => false, 'show_ui' => true, 'show_in_menu' => 'tools.php', 'supports' => array( 'title' ), 'capabilities' => array( 'create_posts' => 'do_not_allow', 'edit_posts' => 'manage_options', 'edit_others_posts' => 'manage_options', 'publish_posts' => 'manage_options', 'read_private_posts' => 'manage_options', 'delete_posts' => 'manage_options', 'delete_others_posts' => 'manage_options' ), 'map_meta_cap' => true ) );
-} );
-function jsc_subscribe() {
-    $nonce = isset( $_POST['jsc_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['jsc_nonce'] ) ) : '';
-    if ( ! wp_verify_nonce( $nonce, 'jsc_subscribe' ) ) { wp_die( esc_html__( 'Please reload the page and try again.', 'jobscout' ), '', array( 'response' => 403 ) ); }
-    $email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-    $result = 'error';
-    if ( is_email( $email ) && empty( $_POST['website'] ) ) {
-        $slug = hash( 'sha256', strtolower( $email ) );
-        $existing = get_page_by_path( $slug, OBJECT, 'jsc_subscriber' );
-        $saved = $existing ? $existing->ID : wp_insert_post( array( 'post_type' => 'jsc_subscriber', 'post_status' => 'private', 'post_name' => $slug, 'post_title' => $email ), true );
-        if ( ! is_wp_error( $saved ) && $saved ) { $result = 'saved'; }
-    }
-    $return = wp_validate_redirect( wp_get_referer(), home_url( '/' ) );
-    wp_safe_redirect( add_query_arg( 'subscription', $result, remove_query_arg( 'subscription', $return ) ) . '#newsletter-heading' );
-    exit;
-}
-add_action( 'admin_post_jsc_subscribe', 'jsc_subscribe' );
-add_action( 'admin_post_nopriv_jsc_subscribe', 'jsc_subscribe' );
+// Newsletter storage and delivery are handled by the JobScout Newsletter plugin.
 
 function jsc_jobs( $args = array() ) {
     return new WP_Query( wp_parse_args( $args, array( 'post_type' => 'job_listing', 'post_status' => 'publish', 'posts_per_page' => 6, 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC' ), 'meta_query' => array( array( 'key' => '_filled', 'value' => '1', 'compare' => '!=' ) ) ) ) );
