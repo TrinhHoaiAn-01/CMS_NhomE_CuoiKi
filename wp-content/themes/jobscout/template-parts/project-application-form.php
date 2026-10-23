@@ -6,7 +6,7 @@ if ( ! $job_id && ! $employer ) { return; }
 <section id="apply" class="jsc-application-section jsc-section"><div class="jsc-container">
 <?php if ( $job_id && ! jsc_job_accepts_applications( $job_id ) ) : ?><h2 class="jsc-title">Position Unavailable</h2><p class="jsc-empty">This position is not accepting applications. <a href="<?php echo esc_url( jsc_url( 'jobs' ) ); ?>">Browse current jobs</a>.</p>
 <?php else : ?>
-<h2 class="jsc-title"><?php echo $job_id ? 'Apply For This Job' : 'Request A Callback'; ?></h2>
+<h2 class="jsc-title"><?php echo esc_html( $job_id ? ( $args['title'] ?? 'Apply For This Job' ) : ( $args['callback_title'] ?? 'Request A Callback' ) ); ?></h2>
 <?php if ( isset( $_GET['application'] ) && 'saved' === sanitize_key( $_GET['application'] ) ) : ?><div class="jsc-application-confirmation" role="status"><h3>Thank you for getting in touch.</h3><p>Your details have been saved privately for review.</p><a href="<?php echo esc_url( jsc_url( 'jobs' ) ); ?>">Browse jobs</a></div>
 <?php else : ?>
 <form class="jsc-application-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
@@ -20,6 +20,6 @@ if ( ! $job_id && ! $employer ) { return; }
 <label class="jsc-application-message">Your message <span aria-hidden="true">*</span><textarea name="applicant_message" rows="6" required maxlength="10000"></textarea></label>
 <label class="jsc-trap" aria-hidden="true">Leave blank<input name="website" tabindex="-1" autocomplete="off"></label>
 <p class="jsc-application-privacy">Your details are stored privately on this site for recruitment enquiries. Fields marked * are required.</p>
-<button type="submit"><?php echo $job_id ? 'Submit Application' : 'Request Callback'; ?></button>
+<button type="submit"><?php echo esc_html( $job_id ? ( $args['button'] ?? 'Submit Application' ) : ( $args['callback_button'] ?? 'Request Callback' ) ); ?></button>
 </form><?php endif; endif; ?>
 </div></section>

@@ -1,5 +1,5 @@
 <?php /** Shared detail summary; native listing data. */
-$id = get_the_ID(); $is_news = 'post' === get_post_type(); $logo = $is_news ? ( has_post_thumbnail() ? get_the_post_thumbnail_url( $id, 'medium' ) : ( get_post_meta( $id, 'jsc_image', true ) ? jsc_asset( get_post_meta( $id, 'jsc_image', true ) ) : '' ) ) : get_post_meta( $id, '_company_logo', true );
+$id = get_the_ID(); $is_news = 'post' === get_post_type(); $logo = $is_news ? get_the_post_thumbnail_url( $id, 'medium' ) : get_post_meta( $id, '_company_logo', true );
 $types = $is_news ? array() : get_the_terms( $id, 'job_listing_type' ); $categories = get_the_terms( $id, $is_news ? 'category' : 'job_listing_category' ); ?>
 <header class="jsc-detail-summary">
 <?php if ( $logo ) : ?><img class="jsc-detail-image" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( $is_news ? get_the_title() : get_post_meta( $id, '_company_name', true ) ); ?>" width="140" height="140"><?php endif; ?>
@@ -9,7 +9,7 @@ $types = $is_news ? array() : get_the_terms( $id, 'job_listing_type' ); $categor
 <?php $application = function_exists( 'get_the_job_application_method' ) ? get_the_job_application_method() : null;
 $closed = ( function_exists( 'is_position_filled' ) && is_position_filled() ) || 'expired' === get_post_status();
 if ( ! $is_news && ! $closed && $application ) : $apply_url = 'email' === $application->type ? 'mailto:' . $application->email : $application->url; ?>
-<a class="jsc-button outline" href="<?php echo esc_url( $apply_url ); ?>">Apply Job</a>
+<a class="jsc-button outline" href="<?php echo esc_url( $apply_url ); ?>"><?php echo esc_html( $args['apply_label'] ?? 'Apply Job' ); ?></a>
 <?php elseif ( ! $is_news && $closed ) : ?><p class="jsc-closed">Applications closed</p><?php endif; ?>
 </div>
 </header>

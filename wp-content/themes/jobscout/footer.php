@@ -1,29 +1,5 @@
 <?php /** Shared newsletter and footer. */ ?>
-<section class="jsc-newsletter" aria-labelledby="newsletter-heading">
-<div class="jsc-newsletter-inner">
-<h2 id="newsletter-heading">Subscribe To<br> Our Newsletter</h2>
-<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" class="jsc-newsletter-form">
-<input type="hidden" name="action" value="jsc_subscribe">
-<?php wp_nonce_field( 'jsc_subscribe', 'jsc_nonce' ); ?>
-<label class="jsc-email-field"><span class="jsc-sr-only">Your email address</span><?php echo jsc_icon( 'mail' ); ?><input type="email" name="email" placeholder="Input your email address" required maxlength="254" autocomplete="email" aria-describedby="newsletter-privacy"></label>
-<label class="jsc-trap" aria-hidden="true">Leave blank<input name="website" tabindex="-1" autocomplete="off"></label>
-<button type="submit">Subscribe</button>
-<p class="jsc-sr-only" id="newsletter-privacy">Subscribe to receive a confirmation email and updates when we publish new posts. You can unsubscribe at any time.</p>
-</form>
-</div>
-<?php if ( isset( $_GET['subscription'] ) ) : ?>
-<?php
-$subscription_messages = array(
-    'saved' => 'Thank you for subscribing! If this is your first sign-up, check your inbox for a confirmation email.',
-    'mail_pending' => 'You are subscribed. Your confirmation email is delayed; we will retry shortly.',
-    'busy' => 'Your sign-up is being processed. Please try again shortly.',
-    'limited' => 'Too many sign-up attempts. Please try again in an hour.',
-);
-$subscription_result = is_string( $_GET['subscription'] ) ? sanitize_key( wp_unslash( $_GET['subscription'] ) ) : '';
-?>
-<p class="jsc-form-message" role="status"><?php echo esc_html( $subscription_messages[ $subscription_result ] ?? 'Please enter a valid email address and try again.' ); ?></p>
-<?php endif; ?>
-</section>
+<?php jsc_render_area( 'shared' ); ?>
 <footer class="jsc-footer">
 <div class="jsc-footer-main">
 <a class="jsc-footer-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo esc_html( jsc_setting( 'brand', 'Plan Do See Global Inc.' ) ); ?></a>

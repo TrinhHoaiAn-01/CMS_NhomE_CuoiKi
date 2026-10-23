@@ -69,8 +69,8 @@ document.querySelectorAll('.jsc-share-button').forEach(button => {
 
 
 
-const photoDialog = document.querySelector('.jsc-gallery-dialog');
-const photoOpener = document.querySelector('.jsc-gallery-open');
+document.querySelectorAll('.jsc-gallery-open').forEach(photoOpener => {
+const photoDialog = document.getElementById(photoOpener.getAttribute('aria-controls'));
 if (photoDialog && photoOpener) {
     photoOpener.addEventListener('click', () => photoDialog.showModal());
     photoDialog.querySelector('.jsc-gallery-close').addEventListener('click', () => photoDialog.close());
@@ -93,4 +93,4 @@ if (photoDialog && photoOpener) {
     });
     showPhoto(0);
 }
-
+});

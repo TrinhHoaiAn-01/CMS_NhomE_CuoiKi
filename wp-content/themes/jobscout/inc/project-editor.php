@@ -3,10 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 function jsc_editor_fields( $post ) {
     if ( 'job_listing' === $post->post_type ) {
-        return array( 'jsc_highlights' => array( 'Card highlights (one per line)', 'textarea' ), 'jsc_rating' => array( 'Staff rating from design reference (replace with real feedback)', 'number' ), 'jsc_gallery' => array( 'Company photos: one image URL | description per line. Blank uses the supplied reference photos.', 'textarea' ) );
-    }
-    if ( 'page' === $post->post_type && 'about' === $post->post_name ) {
-        return array( 'jsc_properties' => array( 'Hospitality management statement (blank line between paragraphs)', 'textarea' ), 'jsc_founded' => array( 'Established since', 'text' ), 'jsc_office' => array( 'Head office', 'text' ), 'jsc_capital' => array( 'Capital', 'text' ), 'jsc_ceo' => array( 'CEO', 'text' ), 'jsc_employees' => array( 'Employees', 'text' ), 'jsc_profile_image' => array( 'Company profile image URL (blank uses supplied Tokyo image)', 'url' ) );
+        return array( 'jsc_highlights' => array( 'Card highlights (one per line)', 'textarea' ), 'jsc_rating' => array( 'Staff rating from design reference (replace with real feedback)', 'number' ), '_company_logo' => array( 'Company logo — Media Library', 'image' ), 'jsc_gallery_ids' => array( 'Company photos — Media Library (select multiple, drag to reorder in the media selection)', 'gallery' ) );
     }
     return 'post' === $post->post_type ? array( 'jsc_location' => array( 'Article location', 'text' ) ) : array();
 }
@@ -17,7 +14,10 @@ add_action( 'add_meta_boxes', function ( $type, $post ) {
         foreach ( jsc_editor_fields( $post ) as $key => $field ) {
             $value = get_post_meta( $post->ID, $key, true );
             echo '<p><label for="' . esc_attr( $key ) . '"><strong>' . esc_html( $field[0] ) . '</strong></label></p>';
-            if ( 'textarea' === $field[1] ) {
+            if ( in_array( $field[1], array( 'image', 'gallery' ), true ) ) {
+                if ( 'image' === $field[1] ) { $value = attachment_url_to_postid( $value ); }
+                jsc_media_field( $key, 'jsc_project_fields[' . $key . ']', $value, 'gallery' === $field[1] );
+            } elseif ( 'textarea' === $field[1] ) {
                 echo '<textarea class="widefat" rows="5" id="' . esc_attr( $key ) . '" name="jsc_project_fields[' . esc_attr( $key ) . ']">' . esc_textarea( $value ) . '</textarea>';
             } else {
                 echo '<input class="widefat" type="' . esc_attr( $field[1] ) . '" id="' . esc_attr( $key ) . '" name="jsc_project_fields[' . esc_attr( $key ) . ']" value="' . esc_attr( $value ) . '"' . ( 'number' === $field[1] ? ' min="0" max="5" step="0.1"' : '' ) . '>';
@@ -33,13 +33,24 @@ add_action( 'save_post', function ( $id, $post ) {
         if ( ! isset( $_POST['jsc_project_fields'][ $key ] ) ) { continue; }
         $raw = wp_unslash( $_POST['jsc_project_fields'][ $key ] );
         if ( ! is_scalar( $raw ) ) { continue; }
-        $value = 'textarea' === $field[1] ? sanitize_textarea_field( $raw ) : ( 'url' === $field[1] ? esc_url_raw( $raw, array( 'http', 'https' ) ) : sanitize_text_field( $raw ) );
+        if ( 'image' === $field[1] ) {
+            $value = wp_attachment_is_image( absint( $raw ) ) ? wp_get_attachment_url( absint( $raw ) ) : '';
+        } elseif ( 'gallery' === $field[1] ) {
+            $value = implode( ',', array_slice( array_filter( array_unique( array_map( 'absint', explode( ',', $raw ) ) ), 'wp_attachment_is_image' ), 0, 12 ) );
+        } else { $value = 'textarea' === $field[1] ? sanitize_textarea_field( $raw ) : sanitize_text_field( $raw ); }
         if ( 'number' === $field[1] && '' !== $value ) { $value = max( 0, min( 5, (float) $value ) ); }
         update_post_meta( $id, $key, $value );
     }
 }, 10, 2 );
 function jsc_gallery_photos( $id ) {
     $photos = array();
+    if ( metadata_exists( 'post', $id, 'jsc_gallery_ids' ) ) {
+        foreach ( array_filter( array_map( 'absint', explode( ',', get_post_meta( $id, 'jsc_gallery_ids', true ) ) ) ) as $image ) {
+            $url = wp_get_attachment_image_url( $image, 'large' );
+            if ( $url ) { $photos[] = array( 'url' => $url, 'alt' => get_post_meta( $image, '_wp_attachment_image_alt', true ) ); }
+        }
+        return $photos;
+    }
     foreach ( explode( "\n", (string) get_post_meta( $id, 'jsc_gallery', true ) ) as $line ) {
         $parts = array_map( 'trim', explode( '|', $line, 2 ) );
         $url = esc_url_raw( $parts[0], array( 'http', 'https' ) );
@@ -47,18 +58,9 @@ function jsc_gallery_photos( $id ) {
         if ( count( $photos ) >= 12 ) { break; }
     }
     if ( $photos ) { return $photos; }
+    if ( get_option( 'jsc_widgets_migrated' ) ) { return $photos; }
     foreach ( array( 'street.jpg' => 'Japanese street', 'project.jpg' => 'Restaurant entrance', 'operations.jpg' => 'Traditional restaurant', 'hospitality.jpg' => 'Cherry blossom lanterns', 'venue.jpg' => 'Garden koi pond', 'torii.jpg' => 'Waterside torii gate' ) as $file => $alt ) { $photos[] = array( 'url' => jsc_asset( $file ), 'alt' => $alt ); }
     return $photos;
-}
-add_action( 'customize_register', function ( $customizer ) {
-    foreach ( array( 'home_hero_image' => 'Home hero', 'career_image' => 'Career background', 'about_hero_image' => 'About banner', 'news_hero_image' => 'News banner', 'jobs_hero_image' => 'Jobs banner', 'contact_hero_image' => 'Contact banner' ) as $key => $label ) {
-        $customizer->add_setting( 'jsc_' . $key, array( 'default' => '', 'sanitize_callback' => 'esc_url_raw' ) );
-        $customizer->add_control( new WP_Customize_Image_Control( $customizer, 'jsc_' . $key, array( 'label' => $label, 'description' => 'Blank uses the supplied design image.', 'section' => 'jsc_project' ) ) );
-    }
-} );
-function jsc_background_style( $key ) {
-    $url = jsc_setting( $key );
-    return $url ? ' style="' . esc_attr( 'background-image:linear-gradient(#20191466,#20191466),url("' . esc_url_raw( $url ) . '")' ) . '"' : '';
 }
 function jsc_footer_menu() {
     echo '<ul class="jsc-footer-menu">';

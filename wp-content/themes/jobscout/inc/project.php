@@ -3,6 +3,11 @@
 defined( 'ABSPATH' ) || exit;
 
 function jsc_asset( $file ) {
+    $images = get_option( 'jsc_media_assets', array() );
+    if ( ! empty( $images[ $file ] ) ) {
+        $url = wp_get_attachment_url( $images[ $file ] );
+        if ( $url ) { return $url; }
+    }
     return get_template_directory_uri() . '/images/project/' . ltrim( $file, '/' );
 }
 
@@ -40,8 +45,6 @@ add_action( 'customize_register', function ( $customizer ) {
     $fields = array(
         'brand' => array( 'Brand name', 'Plan Do See Global Inc.' ),
         'tagline' => array( 'Brand subtitle', 'RECRUITING' ),
-        'home_heading' => array( 'Home hero heading', 'Find Your Dream Jobs' ),
-        'home_description' => array( 'Home hero description', 'The secret behind our company is simple: to always put ourselves in the other person’s shoes—employee, guest or customer. This allows us to see the world through their eyes, anticipate their needs and better understand their feelings.' ),
     );
     foreach ( $fields as $key => $field ) {
         $customizer->add_setting( 'jsc_' . $key, array( 'default' => $field[1], 'sanitize_callback' => 'sanitize_text_field' ) );
@@ -119,3 +122,4 @@ function jsc_contact_phone( $key ) {
 require get_template_directory() . '/inc/project-forms.php';
 
 require get_template_directory() . '/inc/project-editor.php';
+require get_template_directory() . '/inc/project-widgets.php';

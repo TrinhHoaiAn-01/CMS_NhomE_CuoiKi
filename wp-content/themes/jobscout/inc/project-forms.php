@@ -1,12 +1,6 @@
 <?php
 /** Private local recruitment enquiries; no outbound mail is sent. */
 defined( 'ABSPATH' ) || exit;
-add_action( 'customize_register', function ( $customizer ) {
-    foreach ( array( 'phone_hcm' => 'Ho Chi Minh employer phone', 'phone_hanoi' => 'Ha Noi employer phone', 'phone_jobs' => 'Jobseeker phone' ) as $key => $label ) {
-        $customizer->add_setting( 'jsc_' . $key, array( 'default' => '', 'sanitize_callback' => 'sanitize_text_field' ) );
-        $customizer->add_control( 'jsc_' . $key, array( 'label' => $label, 'section' => 'jsc_project', 'type' => 'text' ) );
-    }
-} );
 add_action( 'init', function () {
     register_post_type( 'jsc_application', array( 'labels' => array( 'name' => 'Recruitment Enquiries', 'singular_name' => 'Recruitment Enquiry' ), 'public' => false, 'show_ui' => true, 'show_in_menu' => 'edit.php?post_type=job_listing', 'supports' => array( 'title', 'editor', 'custom-fields' ), 'capabilities' => array( 'create_posts' => 'do_not_allow', 'edit_posts' => 'manage_options', 'edit_others_posts' => 'manage_options', 'publish_posts' => 'manage_options', 'read_private_posts' => 'manage_options', 'delete_posts' => 'manage_options', 'delete_others_posts' => 'manage_options' ), 'map_meta_cap' => true ) );
 } );

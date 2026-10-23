@@ -10,7 +10,7 @@
 .jsc-home-hero{min-height:540px;display:flex;align-items:center;background:#555;color:#fff}.jsc-hero-copy{width:min(940px,calc(100% - 48px));margin:auto}.jsc-hero-copy h1{font-size:40px;text-transform:uppercase;margin-bottom:4px}.jsc-hero-copy>p{font-size:18px;line-height:1.5;max-width:920px}
 .jsc-job-search{display:flex;gap:16px;padding:20px;background:#201c17a6;margin-top:18px}.jsc-search-field,.jsc-location-field{display:flex;align-items:center;background:#fff;color:var(--orange);padding-left:18px;min-width:0}.jsc-search-field{flex:1.9}.jsc-location-field{flex:1}.jsc-job-search svg{width:22px;flex:0 0 22px}.jsc-job-search input,.jsc-job-search select{border:0;width:100%;flex:1;font-size:16px;padding:0 14px;color:#777}.jsc-job-search button{flex:0 0 162px;padding:12px}
 .jsc-career{min-height:500px;background:#554c46;color:#fff;display:flex;align-items:center;padding:65px 24px 75px;text-align:center}.jsc-career-copy{max-width:850px;margin:auto}.jsc-career .jsc-title{margin-bottom:22px}.jsc-career p{font-size:18px;line-height:1.45;margin-bottom:28px}.jsc-career-button{background:transparent;border:1px solid #fff;margin-top:12px;min-width:182px}.jsc-career-button:hover{background:#fff;color:#302925}
-.jsc-home-hero{background-image:linear-gradient(#1b19144d,#1b19144d),url(../images/project/home-hero.jpg);background-size:cover;background-position:center 53%}.jsc-career{background-image:linear-gradient(#130f0b2b,#130f0b2b),url(../images/project/career-background.png);background-size:cover;background-position:center}.jsc-home-news .jsc-news-grid{row-gap:50px}.jsc-home-news{padding-bottom:80px}
+.jsc-home-hero{background-color:#342b26;background-size:cover;background-position:center 53%}.jsc-career{background-color:#342b26;background-size:cover;background-position:center}.jsc-home-news .jsc-news-grid{row-gap:50px}.jsc-home-news{padding-bottom:80px}
 /* Desktop proportions measured against the 1440 × 3470 Home reference. */
 @media(min-width:1101px){.jsc-top-jobs{padding:60px 0 70px}.jsc-top-jobs .jsc-job-card{min-height:242px}.jsc-home-news .jsc-news-card{min-height:240px}.jsc-home-news .jsc-news-image{height:200px;align-self:center}.jsc-home-news .jsc-news-copy p{font-size:16px;line-height:1.4}.jsc-home-news .jsc-news-copy{align-self:center}.jsc-home-news .jsc-news-copy p{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.jsc-newsletter h2{flex-basis:190px}.jsc-newsletter-inner{gap:20px}.jsc-home-news{padding-top:60px;padding-bottom:80px}.jsc-home-hero{background-size:100% auto;background-position:center 46%}}
 /* Tablet: retain two columns while reducing image and navigation footprints. */
@@ -24,7 +24,7 @@
 /* Final Home reference corrections: card rhythm and newsletter strip height. */
 @media(min-width:1101px){.jsc-top-jobs{padding-bottom:64px}.jsc-highlights{line-height:1.5}.jsc-home-news .jsc-news-copy p{-webkit-line-clamp:3}.jsc-home-news .jsc-title{margin-bottom:32px}.jsc-newsletter{padding-top:21px;padding-bottom:21px}.jsc-hero-copy{transform:translateY(6px)}}
 
-.jsc-page-hero{height:360px;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;color:#fff;text-align:center;padding:30px 24px}.jsc-page-hero h1{font-size:40px;text-transform:uppercase;line-height:1.4}.jsc-about-hero{background-image:linear-gradient(#20150f80,#20150f80),url(../images/project/about-hero.jpg);background-position:center 52%}
+.jsc-page-hero{height:360px;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;color:#fff;text-align:center;padding:30px 24px}.jsc-page-hero h1{font-size:40px;text-transform:uppercase;line-height:1.4}.jsc-about-hero{background-color:#342b26;background-position:center 52%}
 
 .jsc-about-vision h3{font-size:21px;margin-bottom:7px}.jsc-about-vision p{font-size:18px;line-height:1.55;margin-bottom:30px}.jsc-about-vision p:last-child{margin-bottom:0}
 
@@ -42,7 +42,7 @@
 /* About: final desktop rhythm from the 1440 × 2436 reference. */
 @media(min-width:1101px){.jsc-about-vision{padding-bottom:77px}.jsc-about-properties{padding-top:45px;padding-bottom:46px}.jsc-about-profile dt{font-size:20px;line-height:1.4}.jsc-about-profile dd{line-height:1.5}.jsc-about-profile dl>div+div{margin-top:27.5px}}
 
-.jsc-news-hero{background-image:url(../images/project/news-banner-photo.jpg)}
+.jsc-news-hero{background-color:#342b26}
 
 .jsc-news-archive .jsc-news-grid{row-gap:50px}.jsc-news-archive .jsc-news-card{min-height:240px}.jsc-news-archive .jsc-news-image{height:200px;align-self:center}.jsc-news-archive .jsc-news-copy p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.jsc-news-archive .jsc-news-copy h3{line-height:1.4}
 
@@ -55,7 +55,7 @@
 @media(max-width:700.98px){.jsc-news-archive .jsc-news-grid{gap:24px}.jsc-news-archive .jsc-news-card{min-height:0}.jsc-news-archive .jsc-news-image{height:auto;min-height:170px;align-self:stretch}.jsc-news-archive .jsc-news-copy h3{font-size:19px}.jsc-news-archive .jsc-news-copy p{-webkit-line-clamp:5}.jsc-pagination{margin-top:28px}.jsc-news-archive>.jsc-section{padding-bottom:45px}}@media(max-width:380.98px){.jsc-news-archive .jsc-news-image{height:220px;min-height:0}}
 .jsc-news-archive .jsc-news-card:focus-within{outline:2px solid #b84b00;outline-offset:3px}.jsc-news-archive .jsc-news-card a:hover{text-decoration:underline;text-underline-offset:3px}
 
-.jsc-jobs-hero{background-image:url(../images/project/jobs-banner-photo.jpg)}.jsc-jobs-archive .jsc-title{text-align:left}
+.jsc-jobs-hero{background-color:#342b26}.jsc-jobs-archive .jsc-title{text-align:left}
 
 .jsc-filter-panel{margin-bottom:30px}.jsc-filter-panel summary{cursor:pointer;font-weight:600}.jsc-filter-panel .jsc-job-search{background:#e6e6e6}.jsc-results-count{margin-bottom:25px;font-size:17px}.jsc-results-count a{color:#b84b00;text-decoration:underline}
 
@@ -99,7 +99,7 @@
 
 .jsc-standard-content{background:#fff;padding:35px}.jsc-standard-content p{margin-bottom:20px}.jsc-standard-content a{color:#b84b00;text-decoration:underline}.jsc-standard-content input,.jsc-standard-content select,.jsc-standard-content textarea{max-width:100%}.jsc-standard-content input[type=checkbox],.jsc-standard-content input[type=radio]{height:auto}.jsc-standard-content fieldset{border:0;border-bottom:1px solid #ddd;padding:20px 0}.jsc-standard-content label{font-weight:600}
 
-.jsc-contact-hero{background-image:linear-gradient(#1c16146b,#1c16146b),url(../images/project/contact-hero.jpg);background-position:center 44%}
+.jsc-contact-hero{background-color:#342b26;background-position:center 44%}
 
 .jsc-contact-address{background:#fff;text-align:center;padding:45px 24px 50px;min-height:172px}.jsc-contact-address h2{font-size:21px;margin-bottom:20px}.jsc-contact-address p{font-size:18px;letter-spacing:.25px}
 
@@ -119,3 +119,6 @@
 /* Shared navigation: collapse before the tablet menu becomes cramped. */
 @media(max-width:780.98px){.jsc-header{height:auto;min-height:80px;position:relative;z-index:20}.jsc-header-inner{width:calc(100% - 40px);min-height:80px;flex-wrap:wrap;gap:12px}.jsc-brand>span{font-size:21px}.jsc-brand small{font-size:13px}.jsc-menu-toggle{display:inline-flex;gap:8px;min-height:44px;padding:10px 12px;background:#fff;color:var(--ink);border:1px solid #ddd;font-size:14px}.jsc-navigation{width:100%;padding:10px 0 20px;align-items:stretch;flex-direction:column;gap:15px}.jsc-js .jsc-navigation{display:none}.jsc-js .jsc-navigation.is-open{display:flex}.jsc-menu{flex-direction:column;align-items:stretch;gap:0}.jsc-menu a{padding:12px;font-size:16px}.jsc-menu .current-menu-item>a:after,.jsc-menu .current_page_parent>a:after{left:0;right:auto;width:3px;top:9px;bottom:9px;height:auto}.jsc-submit{width:100%}}
 @media(max-width:380.98px){.jsc-header-inner{width:calc(100% - 32px)}.jsc-brand>span{font-size:17px}.jsc-menu-toggle{padding:10px;font-size:13px}.jsc-archive-toolbar{flex-direction:column;align-items:stretch;gap:16px}.jsc-sort-form select{width:100%;flex:1}.jsc-sort-form{width:100%}.jsc-job-detail .jsc-rating{font-size:26px;gap:8px}}
+
+/* Detail widgets retain their layout while remaining individually reorderable. */
+.jsc-job-detail > .jsc-container{display:grid;grid-template-columns:minmax(0,1fr) 274px;gap:0 45px}.jsc-job-detail > .jsc-container > *{grid-column:1 / -1}.jsc-job-detail > .jsc-container > .jsc-job-description,.jsc-job-detail > .jsc-container > .jsc-job-location{grid-column:1}.jsc-job-detail > .jsc-container > .jsc-job-sidebar{grid-column:2;grid-row:3 / span 2}.jsc-related-jobs > .jsc-container,.jsc-related-news > .jsc-container{padding:0;width:100%}@media(max-width:780px){.jsc-job-detail > .jsc-container{display:block}}
